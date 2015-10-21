@@ -36,6 +36,9 @@ group :development, :test do
   # Use RSpec for unit tests
   gem 'rspec-rails', '~> 3.3'
 
+  # Use Cucumber for acceptance tests
+  gem 'cucumber-rails', '~> 1.4'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
