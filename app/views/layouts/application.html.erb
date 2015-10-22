@@ -8,29 +8,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <!-- Static navbar -->
-    <div id='top-nav' class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Test Ruby PDX</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="work.html">Upcoming Meetings</a></li>
-            <li><a href="about.html">Past Meetings</a></li>
-            <li><a href="blog.html">About Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+  <!-- Static navbar -->
+  <div id='top-nav' class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Test Ruby PDX</a>
       </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="work.html">Upcoming Meetings</a></li>
+          <li><a href="about.html">Past Meetings</a></li>
+          <li><a href="blog.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
+  </div>
     
-<%= yield %>
+  <div class='container'>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
