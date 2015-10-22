@@ -10,7 +10,7 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-  	background-color: #ffffff;
+  	background-color: #f2f2f2;
   	font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -83,6 +83,9 @@ a:after {
     padding: 0;
 }
 
+#top-nav {
+  margin-bottom: 4em;
+}
 
 .navbar {
 	text-transform: uppercase;
