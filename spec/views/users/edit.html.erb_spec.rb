@@ -19,12 +19,8 @@ RSpec.describe "users/edit", type: :view do
       assert_select "input#user_last_name[name=?]", "user[last_name]"
 
       assert_select "input#user_email[name=?]", "user[email]"
-    end
-  end
 
-  it "does not let the user edit the 'admin' attribute" do 
-    assert_select "form[action=?][method=?]", user_path(@user), "post" do 
-      #
+      assert_select "input#user_admin[name=?]", "user[admin]", false
     end
   end
 end
