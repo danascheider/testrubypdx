@@ -34,6 +34,42 @@
   <div class='container'>
     <%= yield %>
   </div>
+  <div id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>Contact Us</h4>
+          <p>
+            Dana Scheider<br/>
+            Email: dana.scheider@gmail.com <br/>
+            Twitter: @danascheider
+          </p>
+        </div><!-- /col-lg-4 -->
+        
+        <div class="col-lg-4">
+          <h4>Links</h4>
+          <p>
+            <a href="/">Test Ruby PDX</a><br/>
+            <a href="http://www.renewfinancial.com">Renew Financial</a><br/>
+            <a href="http://twitter.com/danascheider">Twitter</a>
+          </p>
+        </div><!-- /col-lg-4 -->
+        
+        <div class="col-lg-4">
+          <h4>About Us</h4>
+          <p>Test Ruby PDX meets once a month for peer mentoring, conversation, and talks for Ruby developers of all levels.</p>
+        </div><!-- /col-lg-4 -->
+      
+      </div>
+    
+    </div>
+  </div>
+  
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag 'bootstrap', media: 'all', 'data-turbolinks-track' => true>
 
 </body>
 </html>
