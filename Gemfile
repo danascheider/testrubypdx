@@ -41,6 +41,9 @@ group :development, :test do
   # Use Cucumber for acceptance tests
   gem 'cucumber-rails', '~> 1.4'
 
+  # Use Factory Girl for fixtures
+  gem 'factory_girl_rails', '~> 4.5'
+
   # Use DatabaseCleaner to clean the database between tests
   gem 'database_cleaner'
 
