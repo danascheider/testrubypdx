@@ -1,0 +1,13 @@
+/* line 5, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+table {
+  width: 100%;
+}
+/* line 8, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+table tr > th {
+  min-width: 15%;
+}
+
+/* line 13, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#new_user {
+  margin: 1em;
+}
