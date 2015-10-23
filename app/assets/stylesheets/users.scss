@@ -16,3 +16,19 @@ table {
     margin-bottom: 1em;
   }
 }
+
+#about-us {
+  .inset-picture {
+    position: relative;
+    float: left;
+    display: inline;
+    clear: both;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+
+  p {
+    display: inline;
+    position: relative;
+  }
+}
