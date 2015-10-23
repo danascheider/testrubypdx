@@ -10,3 +10,9 @@ Feature: Upcoming meetings page
     When I visit the "Upcoming Meetings" page
     Then I should see the text "No meetings have been scheduled yet"
     And I should see a link to Dana's Twitter page
+
+  Scenario: There is an upcoming meeting
+    Given there is 1 upcoming meeting
+    And there are 2 past meetings
+    When I visit the "Upcoming Meetings" page
+    Then I should see 1 meeting listed

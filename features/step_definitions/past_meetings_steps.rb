@@ -14,7 +14,7 @@ Then(/^I should see a link to the 'Upcoming Meetings' page$/) do
   expect(page).to have_css "a[href='/meetings/upcoming']"
 end
 
-Then(/^I should see (\d+) meetings listed$/) do|count|
+Then(/^I should see (\d+) meeting(?:s?) listed$/) do|count|
   # The meetings are displayed in a table with one <tr> per meeting, but
   # there is also a <tr> for the header row, hence the + 1
   expect(page).to have_css "tr", count: count.to_i + 1
