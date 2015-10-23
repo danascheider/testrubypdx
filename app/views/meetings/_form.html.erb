@@ -11,11 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+    <tr class="field">
+      <th><%= f.label :date %></th>
+      <td><%= f.datetime_select :date %></td>
+    </tr>
+    <tr class="actions">
+      <td colspan='2'><%= f.submit %></td>
+    </tr>
+  </table>
 <% end %>

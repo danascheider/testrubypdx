@@ -30,6 +30,10 @@
           <li><a href="/meetings/past">Past Meetings</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/contact">Contact</a></li>
+          <% if current_user %>
+            <li><a href='/meetings/new'>Add Meeting</a></li>
+            <li><a href='/logout'>Logout</a></li>
+          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

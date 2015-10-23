@@ -1,0 +1,26 @@
+<div class='row'>
+  <div class='col-lg-8 col-lg-offset-2 centered'>
+
+    <h1>Login</h1>
+
+    <%= form_tag("/login", method: 'post', id: 'login-form') do %>
+      <table>
+        <tr class='field'>
+          <th>Username</th>
+          <td><%= text_field_tag(:username) %></td>
+        </tr>
+        <tr class='field'>
+          <th>Password</th>
+          <td><%= password_field_tag(:password) %></td>
+        </tr>
+        <tr class='actions'>
+          <td colspan='2'>
+            <%= submit_tag('Login') %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+    <%= link_to 'Show', @user %> |
+    <%= link_to 'Back', users_path %><br><br>
+  </div>
+</div>
