@@ -1,0 +1,12 @@
+/* line 6, /Users/dana/Development/testrubypdx/app/assets/stylesheets/site.scss */
+#about-us .inset-picture {
+  position: relative;
+  float: left;
+  display: none;
+  clear: both;
+}
+/* line 13, /Users/dana/Development/testrubypdx/app/assets/stylesheets/site.scss */
+#about-us p {
+  display: inline;
+  position: relative;
+}
