@@ -1,16 +1,19 @@
 Rails.application.routes.draw do
+
+  get 'meetings/past' => 'meetings#past'
+
   resources :meetings
   resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'site#index'
 
-  get 'contact' => 'site#contact'
+  get  'contact' => 'site#contact'
   post 'contact' => 'site#send_mail'
-
-  get 'about' => 'site#about'
+  get  'about' => 'site#about'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
