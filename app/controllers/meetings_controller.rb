@@ -21,6 +21,11 @@ class MeetingsController < ApplicationController
   def edit
   end
 
+  # GET /meetings/past
+  def past
+    @meetings = Meeting.past
+  end
+
   # POST /meetings
   # POST /meetings.json
   def create
