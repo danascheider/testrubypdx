@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "meetings/edit", type: :view do
   before(:each) do
-    @meeting = assign(:meeting, Meeting.create!())
+    @meeting = assign(:meeting, FactoryGirl.create(:meeting))
   end
 
   it "renders the edit meeting form" do
