@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'meetings/past' => 'meetings#past'
+  get 'meetings/upcoming' => 'meetings#upcoming'
 
   resources :meetings
   resources :users

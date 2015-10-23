@@ -2,12 +2,8 @@ Given(/^there are no past meetings$/) do
   Meeting.past.count == 0
 end
 
-Given(/^there are (\d+) past meetings$/) do |count|
-  @past_meetings = FactoryGirl.create_list(:past_meeting, count.to_i)
-end
-
-Given(/^there (?:is|are) (\d+) upcoming meeting(?:s?)$/) do |count|
-  @upcoming_meetings = FactoryGirl.create_list(:upcoming_meeting, count.to_i)
+Given(/^there (?:is|are) (\d+) past meeting(?:s?)$/) do |count|
+  FactoryGirl.create_list(:past_meeting, count.to_i)
 end
 
 When(/^I visit the 'Past Meetings' page$/) do 

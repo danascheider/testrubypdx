@@ -38,5 +38,9 @@ RSpec.describe MeetingsController, type: :routing do
     it "routes to #past" do 
       expect(:get => "meetings/past").to route_to("meetings#past")
     end
+
+    it "routes to #upcoming" do 
+      expect(:get => "meetings/past").to route_to("meetings#past")
+    end
   end
 end
