@@ -11,9 +11,22 @@ table {
 }
 
 #new_user, .edit_user {
+  table {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  th, td {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
   .field, .actions {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    box-sizing: border-box;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  .field input {
+    width: 100%;
   }
 }
 
