@@ -9,3 +9,8 @@ end
 When(/^I visit the "Upcoming Meetings" page$/) do 
   visit '/meetings/upcoming'
 end
+
+Then(/^I should see a link to Dana's Twitter page$/) do 
+  expect(page).to have_css "a[href='http://twitter.com/danascheider']"
+  expect(page).to have_text "Follow @danascheider on Twitter"
+end
