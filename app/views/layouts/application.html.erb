@@ -12,6 +12,9 @@
   <!-- Static navbar -->
   <div id='top-nav' class="navbar navbar-inverse navbar-static-top">
     <div class="container">
+      <% flash.each do |key, value| %>
+        <a href='#' data-dismiss='alert'><%= value %></a>
+      <% end %>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-bar"></span>
@@ -24,7 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="work.html">Upcoming Meetings</a></li>
           <li><a href="about.html">Past Meetings</a></li>
-          <li><a href="blog.html">About Us</a></li>
+          <li><a href="/about">About Us</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div><!--/.nav-collapse -->

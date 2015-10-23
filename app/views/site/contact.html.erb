@@ -1,5 +1,4 @@
 <!-- +++++ Contact Section +++++ -->
-
 <div class="container pt">
   <div class="row mt">
     <div class="col-lg-6 col-lg-offset-3 centered">
@@ -11,23 +10,25 @@
   </div>
   <div class="row mt">  
     <div class="col-lg-8 col-lg-offset-2">
-      <form role="form" id='contact-form'>
+      <%= form_tag('/contact', method: 'post', id: 'contact-form') do %>
         <div class="form-group">
-          <input type="text" name="name" class="form-control" id="name-field" placeholder="Your Name">
+          <%= text_field_tag 'name', nil, class: 'form-control', placeholder: 'Your Name' %>
           <br>
         </div>
         <div class="form-group">
-          <input type="email" name="email" class="form-control" id="email-field" placeholder="Enter email">
+          <%= text_field_tag 'email', nil, class: 'form-control', placeholder: 'Enter E-mail' %>
+
           <br>
         </div>
         <div class="form-group">
-          <input type="text" name="subject" class="form-control" id="subject-field" placeholder="Subject">
+          <%= text_field_tag 'subject', nil, class: 'form-control', placeholder: 'Subject' %>
           <br>
         </div>
-        <textarea name="body" class="form-control" rows="6" placeholder="Enter your text here"></textarea>
+
+        <%= text_area_tag 'body', nil, class: 'form-control', rows: 6, placeholder: 'Enter your message here' %>
           <br>
         <button type="submit" class="btn btn-success">SUBMIT</button>
-      </form>         
+      <% end %>         
     </div>
   </div><!-- /row -->
 </div><!-- /container -->
