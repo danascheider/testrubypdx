@@ -38,7 +38,7 @@ RSpec.describe MeetingsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all meetings as @meetings" do
-      meeting = Meeting.create! valid_attributes
+      meeting = FactoryGirl.create(:meeting)
       get :index, {}, valid_session
       expect(assigns(:meetings)).to eq([meeting])
     end
@@ -46,7 +46,7 @@ RSpec.describe MeetingsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested meeting as @meeting" do
-      meeting = Meeting.create! valid_attributes
+      meeting = FactoryGirl.create(:meeting)
       get :show, {:id => meeting.to_param}, valid_session
       expect(assigns(:meeting)).to eq(meeting)
     end
@@ -61,7 +61,7 @@ RSpec.describe MeetingsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested meeting as @meeting" do
-      meeting = Meeting.create! valid_attributes
+      meeting = FactoryGirl.create(:meeting)
       get :edit, {:id => meeting.to_param}, valid_session
       expect(assigns(:meeting)).to eq(meeting)
     end
@@ -116,20 +116,20 @@ RSpec.describe MeetingsController, type: :controller do
       }
 
       it "updates the requested meeting" do
-        meeting = Meeting.create! valid_attributes
+        meeting = FactoryGirl.create(:meeting)
         put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
         meeting.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested meeting as @meeting" do
-        meeting = Meeting.create! valid_attributes
+        meeting = FactoryGirl.create(:meeting)
         put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
         expect(assigns(:meeting)).to eq(meeting)
       end
 
       it "redirects to the meeting" do
-        meeting = Meeting.create! valid_attributes
+        meeting = FactoryGirl.create(:meeting)
         put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
         expect(response).to redirect_to(meeting)
       end
@@ -137,13 +137,13 @@ RSpec.describe MeetingsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the meeting as @meeting" do
-        meeting = Meeting.create! valid_attributes
+        meeting = FactoryGirl.create(:meeting)
         put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
         expect(assigns(:meeting)).to eq(meeting)
       end
 
       it "re-renders the 'edit' template" do
-        meeting = Meeting.create! valid_attributes
+        meeting = FactoryGirl.create(:meeting)
         put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -152,14 +152,14 @@ RSpec.describe MeetingsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested meeting" do
-      meeting = Meeting.create! valid_attributes
+      meeting = FactoryGirl.create(:meeting)
       expect {
         delete :destroy, {:id => meeting.to_param}, valid_session
       }.to change(Meeting, :count).by(-1)
     end
 
     it "redirects to the meetings list" do
-      meeting = Meeting.create! valid_attributes
+      meeting = FactoryGirl.create(:meeting)
       delete :destroy, {:id => meeting.to_param}, valid_session
       expect(response).to redirect_to(meetings_url)
     end
