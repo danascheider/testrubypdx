@@ -6,4 +6,4 @@ Feature: About page
 
   Scenario: Visit about page
     When I visit the "About Us" page
-    Then I should see the text 'ABOUT TEST RUBY PDX'
+    Then I should see the text "ABOUT TEST RUBY PDX"

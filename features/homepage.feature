@@ -6,5 +6,5 @@ Feature: User visits homepage
 
   Scenario:
     When I visit the web site
-    Then I should see the text 'Welcome to Test Ruby PDX!'
+    Then I should see the text "Welcome to Test Ruby PDX!"
     And I should see the top navigation bar

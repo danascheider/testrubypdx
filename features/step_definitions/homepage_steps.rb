@@ -2,7 +2,7 @@ When(/^I visit the web site$/) do
   visit '/'
 end
 
-Then(/^I should see the text '(.*)'$/) do |text|
+Then(/^I should see the text "(.*)"$/) do |text|
   expect(page).to have_content text
 end
 
