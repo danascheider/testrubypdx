@@ -67,6 +67,15 @@ RSpec.describe MeetingsController, type: :controller do
     end
   end
 
+  describe "GET #past" do 
+    it "assigns the past meetings as @meetings" do 
+      past = FactoryGirl.create_list(:past_meeting, 2)
+      upcoming = FactoryGirl.create(:upcoming_meeting)
+      get :past, valid_session
+      expect(assigns(:meetings)).to eq past
+    end
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Meeting" do
