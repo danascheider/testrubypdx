@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Meeting, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to respond_to(:date) }
+  it { is_expected.to respond_to(:description) }
 end
