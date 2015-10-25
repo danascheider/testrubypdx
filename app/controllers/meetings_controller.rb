@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize, except: [:show, :index, :past, :upcoming]
+  before_filter :authorize
 
   # GET /meetings
   # GET /meetings.json
@@ -27,6 +27,7 @@ class MeetingsController < ApplicationController
     @meetings = Meeting.past
   end
 
+  # GET /meetings/upcoming
   def upcoming
     @meetings = Meeting.upcoming
   end
