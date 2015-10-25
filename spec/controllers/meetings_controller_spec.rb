@@ -160,17 +160,42 @@ RSpec.describe MeetingsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested meeting" do
-      meeting = FactoryGirl.create(:meeting)
-      expect {
+    context 'authorized' do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+      end
+
+      it "destroys the requested meeting" do
+        meeting = FactoryGirl.create(:meeting)
+        expect {
+          delete :destroy, {:id => meeting.to_param}, valid_session
+        }.to change(Meeting, :count).by(-1)
+      end
+
+      it "redirects to the meetings list" do
+        meeting = FactoryGirl.create(:meeting)
         delete :destroy, {:id => meeting.to_param}, valid_session
-      }.to change(Meeting, :count).by(-1)
+        expect(response).to redirect_to(meetings_url)
+      end
     end
 
-    it "redirects to the meetings list" do
-      meeting = FactoryGirl.create(:meeting)
-      delete :destroy, {:id => meeting.to_param}, valid_session
-      expect(response).to redirect_to(meetings_url)
+    context 'unauthorized' do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "doesn\'t destroy the requested meeting" do 
+        meeting = FactoryGirl.create(:meeting)
+        expect {
+          delete :destroy, {:id => meeting.to_param}, valid_session
+        }.not_to change(Meeting, :count)
+      end
+
+      it "redirects to the login page" do 
+        meeting = FactoryGirl.create(:meeting)
+        delete :destroy, {:id => meeting.to_param}, valid_session
+        expect(response).to redirect_to('/login')
+      end
     end
   end
 
