@@ -14,7 +14,11 @@
   <table>
     <tr class="field">
       <th><%= f.label :date %></th>
-      <td><%= f.datetime_select :date %></td>
+      <td><%= f.date_field :date, class: 'form-control' %></td>
+    </tr>
+    <tr class="field">
+      <th><%= f.label :description %></th>
+      <td><%= f.text_area :description, height: '6', class: 'form-control' %></td>
     </tr>
     <tr class="actions">
       <td colspan='2'><%= f.submit %></td>
