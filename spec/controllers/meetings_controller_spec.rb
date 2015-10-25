@@ -36,14 +36,6 @@ RSpec.describe MeetingsController, type: :controller do
   # MeetingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all meetings as @meetings" do
-      meeting = FactoryGirl.create(:meeting)
-      get :index, {}, valid_session
-      expect(assigns(:meetings)).to eq([meeting])
-    end
-  end
-
   describe "GET #show" do
     it "assigns the requested meeting as @meeting" do
       meeting = FactoryGirl.create(:meeting)
@@ -53,17 +45,40 @@ RSpec.describe MeetingsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new meeting as @meeting" do
-      get :new, {}, valid_session
-      expect(assigns(:meeting)).to be_a_new(Meeting)
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+      end
+
+      it "assigns a new meeting as @meeting" do
+        get :new, {}, valid_session
+        expect(assigns(:meeting)).to be_a_new(Meeting)
+      end
+    end
+
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "doesn\'t assign a new meeting" do 
+        get :new, {}, valid_session
+        expect(assigns(:meeting)).to be nil
+      end
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested meeting as @meeting" do
-      meeting = FactoryGirl.create(:meeting)
-      get :edit, {:id => meeting.to_param}, valid_session
-      expect(assigns(:meeting)).to eq(meeting)
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+      end
+
+      it "assigns the requested meeting as @meeting" do
+        meeting = FactoryGirl.create(:meeting)
+        get :edit, {:id => meeting.to_param}, valid_session
+        expect(assigns(:meeting)).to eq(meeting)
+      end
     end
   end
 
@@ -121,40 +136,72 @@ RSpec.describe MeetingsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {date: Date.tomorrow}
       }
 
-      it "updates the requested meeting" do
-        meeting = FactoryGirl.create(:meeting)
-        put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
-        meeting.reload
-        skip("Add assertions for updated state")
+      context 'authorized' do 
+        before(:each) do 
+          @user = FactoryGirl.create(:user)
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+        end
+
+        it "updates the requested meeting" do
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
+          meeting.reload
+          expect(meeting.date).to eq Date.tomorrow
+        end
+
+        it "assigns the requested meeting as @meeting" do
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
+          expect(assigns(:meeting)).to eq meeting
+        end
+
+        it "redirects to the meeting" do
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
+          expect(response).to redirect_to(meeting)
+        end
       end
 
-      it "assigns the requested meeting as @meeting" do
-        meeting = FactoryGirl.create(:meeting)
-        put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
-        expect(assigns(:meeting)).to eq(meeting)
-      end
+      context 'unauthorized' do 
+        before(:each) do 
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+        end
 
-      it "redirects to the meeting" do
-        meeting = FactoryGirl.create(:meeting)
-        put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
-        expect(response).to redirect_to(meeting)
+        it "doesn't update the requested meeting" do 
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
+          meeting.reload
+          expect(meeting.description).not_to eq 'Foo bar baz'
+        end
+
+        it "redirects to the login page" do 
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
+          expect(response).to redirect_to('/login')
+        end
       end
     end
 
     context "with invalid params" do
-      it "assigns the meeting as @meeting" do
-        meeting = FactoryGirl.create(:meeting)
-        put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
-        expect(assigns(:meeting)).to eq(meeting)
-      end
+      context 'authorized' do 
+        before(:each) do 
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+        end
 
-      it "re-renders the 'edit' template" do
-        meeting = FactoryGirl.create(:meeting)
-        put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        it "assigns the meeting as @meeting" do
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
+          expect(assigns(:meeting)).to eq(meeting)
+        end
+
+        it "re-renders the 'edit' template" do
+          meeting = FactoryGirl.create(:meeting)
+          put :update, {:id => meeting.to_param, :meeting => invalid_attributes}, valid_session
+          expect(response).to render_template("edit")
+        end
       end
     end
   end
