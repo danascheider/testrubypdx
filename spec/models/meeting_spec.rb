@@ -37,4 +37,11 @@ RSpec.describe Meeting, type: :model do
       expect(meeting).not_to be_valid
     end
   end
+
+  describe 'display_date' do 
+    it 'gives the correct display date' do 
+      meeting = FactoryGirl.create(:meeting)
+      expect(meeting.display_date).to eql "Thursday, October 22, 2015"
+    end
+  end
 end
