@@ -4,10 +4,13 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
   
-  get 'meetings/past' => 'meetings#past'
-  get 'meetings/upcoming' => 'meetings#upcoming'
+  resources :meetings, except: [:index] do
+    collection do 
+      get 'past'
+      get 'upcoming'
+    end
+  end
 
-  resources :meetings
   resources :users, except: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
