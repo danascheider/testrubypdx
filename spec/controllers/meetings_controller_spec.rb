@@ -37,10 +37,16 @@ RSpec.describe MeetingsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #show" do
+    let(:meeting) { FactoryGirl.create(:meeting) }
+
     it "assigns the requested meeting as @meeting" do
-      meeting = FactoryGirl.create(:meeting)
       get :show, {:id => meeting.to_param}, valid_session
       expect(assigns(:meeting)).to eq(meeting)
+    end
+
+    it "renders the show template" do 
+      get :show, {:id => meeting.to_param}, valid_session
+      expect(response).to render_template("show")
     end
   end
 
