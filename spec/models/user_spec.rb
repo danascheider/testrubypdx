@@ -31,4 +31,10 @@ RSpec.describe User, type: :model do
     user.email = nil
     expect(user).not_to be_valid
   end
+
+  it 'is invalid with a duplicate username' do 
+    new_user = FactoryGirl.create(:user)
+    user.name = new_user.name
+    expect(user).not_to be_valid
+  end
 end
