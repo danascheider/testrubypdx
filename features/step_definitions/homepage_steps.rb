@@ -1,3 +1,11 @@
+Given(/^I am not logged in$/) do 
+  ensure_logged_out
+end
+
+Given(/^I am logged in$/) do 
+  #
+end
+
 When(/^I visit the web site$/) do 
   visit '/'
 end
