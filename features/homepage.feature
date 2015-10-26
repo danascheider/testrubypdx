@@ -14,3 +14,4 @@ Feature: User visits homepage
     When I visit the web site
     Then I should not see the text "LOGOUT"
     And I should not see the text "ADD MEETING"
+    And I should not see the text "LOGIN"
