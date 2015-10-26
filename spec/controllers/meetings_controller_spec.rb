@@ -90,6 +90,24 @@ RSpec.describe MeetingsController, type: :controller do
         get :edit, {:id => meeting.to_param}, valid_session
         expect(assigns(:meeting)).to eq(meeting)
       end
+
+      it "renders the 'edit' template" do 
+        meeting = FactoryGirl.create(:meeting)
+        get :edit, {:id => meeting.to_param}, valid_session
+        expect(response).to render_template "edit"
+      end
+    end
+
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "redirects to the login page" do 
+        meeting = FactoryGirl.create(:meeting)
+        get :edit, {:id => meeting.to_param}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
