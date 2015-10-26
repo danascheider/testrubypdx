@@ -71,6 +71,11 @@ RSpec.describe MeetingsController, type: :controller do
         get :new, {}, valid_session
         expect(assigns(:meeting)).to be nil
       end
+
+      it "redirects to the login page" do 
+        get :new, {}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
