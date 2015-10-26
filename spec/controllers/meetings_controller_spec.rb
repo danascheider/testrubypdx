@@ -130,34 +130,57 @@ RSpec.describe MeetingsController, type: :controller do
   end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Meeting" do
-        expect {
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+      end
+
+      context "with valid params" do
+        it "creates a new Meeting" do
+          expect {
+            post :create, {:meeting => valid_attributes}, valid_session
+          }.to change(Meeting, :count).by(1)
+        end
+
+        it "assigns a newly created meeting as @meeting" do
           post :create, {:meeting => valid_attributes}, valid_session
-        }.to change(Meeting, :count).by(1)
+          expect(assigns(:meeting)).to be_a(Meeting)
+          expect(assigns(:meeting)).to be_persisted
+        end
+
+        it "redirects to the created meeting" do
+          post :create, {:meeting => valid_attributes}, valid_session
+          expect(response).to redirect_to(Meeting.last)
+        end
       end
 
-      it "assigns a newly created meeting as @meeting" do
-        post :create, {:meeting => valid_attributes}, valid_session
-        expect(assigns(:meeting)).to be_a(Meeting)
-        expect(assigns(:meeting)).to be_persisted
-      end
+      context "with invalid params" do
+        it "assigns a newly created but unsaved meeting as @meeting" do
+          post :create, {:meeting => invalid_attributes}, valid_session
+          expect(assigns(:meeting)).to be_a_new(Meeting)
+        end
 
-      it "redirects to the created meeting" do
-        post :create, {:meeting => valid_attributes}, valid_session
-        expect(response).to redirect_to(Meeting.last)
+        it "re-renders the 'new' template" do
+          post :create, {:meeting => invalid_attributes}, valid_session
+          expect(response).to render_template("new")
+        end
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved meeting as @meeting" do
-        post :create, {:meeting => invalid_attributes}, valid_session
-        expect(assigns(:meeting)).to be_a_new(Meeting)
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:meeting => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      it "doesn't create a new meeting" do 
+        expect {
+          post :create, {:meeting => valid_attributes}, valid_session
+        }.not_to change(Meeting, :count)
+      end
+
+      it "redirects to the login page" do 
+        post :create, {:meeting => valid_attributes}, valid_session
+        expect(response).to redirect_to '/login'
       end
     end
   end
