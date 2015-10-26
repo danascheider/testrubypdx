@@ -38,9 +38,22 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
+      user = FactoryGirl.create(:user, valid_attributes)
       get :show, {:id => user.to_param}, valid_session
       expect(assigns(:user)).to eq(user)
+    end
+
+    context "unauthorized" do 
+      let(:user) { FactoryGirl.create(:user) }
+
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "shows the login page" do 
+        get :show, {:id => user.to_param}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
