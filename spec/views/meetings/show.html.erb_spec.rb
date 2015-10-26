@@ -9,6 +9,6 @@ RSpec.describe "meetings/show", type: :view do
     skip('Gives me hell about current_user')
     render
 
-    assert_select('div.show-meeting')
+    expect(page).to have_css 'div.show-meeting'
   end
 end
