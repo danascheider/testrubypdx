@@ -7,20 +7,19 @@
       <table>
         <tr class='field'>
           <th>Username</th>
-          <td><%= text_field_tag(:username) %></td>
+          <td><%= text_field_tag(:username, '', class: 'form-control') %></td>
         </tr>
         <tr class='field'>
           <th>Password</th>
-          <td><%= password_field_tag(:password) %></td>
+          <td><%= password_field_tag(:password, '', class: 'form-control') %></td>
         </tr>
         <tr class='actions'>
           <td colspan='2'>
-            <%= submit_tag('Login') %>
+            <%= submit_tag('Login', class: 'btn btn-success') %>
           </td>
         </tr>
       </table>
     <% end %>
-    <%= link_to 'Show', @user %> |
-    <%= link_to 'Back', users_path %><br><br>
+    <%= link_to 'Back', root_path %><br><br>
   </div>
 </div>
