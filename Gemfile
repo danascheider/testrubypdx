@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use postgres as the prod database
+gem 'pg', '~> 0.18'
+
 gem 'bootstrap-sass', '~> 3.3.5'
 
 group :development, :test do
@@ -55,6 +57,9 @@ group :development, :test do
   # Check test coverage using SimpleCov and Coveralls
   gem 'simplecov', '~> 0.10'
   gem 'coveralls', '~> 0.8'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 end
 
 group :development do
