@@ -51,6 +51,10 @@ group :development, :test do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  # Check test coverage using SimpleCov and Coveralls
+  gem 'simplecov', '~> 0.10'
+  gem 'coveralls', '~> 0.8'
 end
 
 group :development do
