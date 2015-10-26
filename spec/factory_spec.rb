@@ -24,6 +24,28 @@ describe 'factories' do
   end
 
   describe 'meeting' do 
-    #
+    context 'basic' do 
+      let(:meeting) { FactoryGirl.create(:meeting) }
+
+      it 'has a date' do 
+        expect(meeting.date).not_to be_nil
+      end
+    end
+
+    context 'past meeting' do 
+      let(:meeting) { FactoryGirl.create(:past_meeting) }
+
+      it 'is in the past' do 
+        expect(meeting.date).to be_past
+      end
+    end
+
+    context 'upcoming meeting' do 
+      let(:meeting) { FactoryGirl.create(:upcoming_meeting) }
+
+      it 'is in the future' do 
+        expect(meeting.date).to be_future
+      end
+    end
   end
 end
