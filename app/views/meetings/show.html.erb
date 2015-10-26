@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @meeting.date %>
-</p>
+<div class='show-meeting'>
+  <h2><%= @meeting.display_date %></h2>
+  <h4><%= @meeting.time %></h4>
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+  <% if current_user %>
+    <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+  <% end %>
+    <% destination = @meeting.date < Date.today ? past_meetings_path : upcoming_meetings_path %>
+    <%= link_to 'Back', destination %>
+</div>
