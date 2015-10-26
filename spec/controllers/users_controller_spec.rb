@@ -24,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: 'user123', password: 'foobarbaz', email: 'foobar@baz.com'}
   }
 
   let(:invalid_attributes) {
@@ -73,9 +73,9 @@ RSpec.describe UsersController, type: :controller do
         expect(assigns(:user)).to be_persisted
       end
 
-      it "redirects to the created user" do
+      it "redirects to the root path" do
         post :create, {:user => valid_attributes}, valid_session
-        expect(response).to redirect_to(User.last)
+        expect(response).to redirect_to('/')
       end
     end
 
@@ -99,20 +99,21 @@ RSpec.describe UsersController, type: :controller do
       }
 
       it "updates the requested user" do
-        user = User.create! valid_attributes
+        user = FactoryGirl.create(:user, valid_attributes)
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested user as @user" do
-        user = User.create! valid_attributes
+        user = FactoryGirl.create(:user, valid_attributes)
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         expect(assigns(:user)).to eq(user)
       end
 
       it "redirects to the user" do
-        user = User.create! valid_attributes
+        user = FactoryGirl.create(:user, valid_attributes)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         expect(response).to redirect_to(user)
       end
@@ -134,15 +135,19 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    let(:user) { FactoryGirl.create(:user, valid_attributes) }
+
+    before(:each) do 
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    end
+
     it "destroys the requested user" do
-      user = User.create! valid_attributes
       expect {
         delete :destroy, {:id => user.to_param}, valid_session
       }.to change(User, :count).by(-1)
     end
 
     it "redirects to the users list" do
-      user = User.create! valid_attributes
       delete :destroy, {:id => user.to_param}, valid_session
       expect(response).to redirect_to(users_url)
     end
