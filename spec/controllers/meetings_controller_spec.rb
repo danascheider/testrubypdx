@@ -60,6 +60,11 @@ RSpec.describe MeetingsController, type: :controller do
         get :new, {}, valid_session
         expect(assigns(:meeting)).to be_a_new(Meeting)
       end
+
+      it "renders the 'new' template" do 
+        get :new, {}, valid_session
+        expect(response).to render_template("new")
+      end
     end
 
     context "unauthorized" do 
@@ -81,18 +86,18 @@ RSpec.describe MeetingsController, type: :controller do
 
   describe "GET #edit" do
     context "authorized" do 
+      let(:meeting) { FactoryGirl.create(:meeting) }
+
       before(:each) do 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
       end
 
       it "assigns the requested meeting as @meeting" do
-        meeting = FactoryGirl.create(:meeting)
         get :edit, {:id => meeting.to_param}, valid_session
         expect(assigns(:meeting)).to eq(meeting)
       end
 
       it "renders the 'edit' template" do 
-        meeting = FactoryGirl.create(:meeting)
         get :edit, {:id => meeting.to_param}, valid_session
         expect(response).to render_template "edit"
       end
@@ -118,6 +123,11 @@ RSpec.describe MeetingsController, type: :controller do
       get :past, valid_session
       expect(assigns(:meetings)).to eq past
     end
+
+    it "renders the 'past' template" do 
+      get :past, valid_session
+      expect(response).to render_template("past")
+    end
   end
 
   describe "GET #upcoming" do 
@@ -126,6 +136,11 @@ RSpec.describe MeetingsController, type: :controller do
       past = FactoryGirl.create_list(:past_meeting, 2)
       get :upcoming, valid_session
       expect(assigns(:meetings)).to eq upcoming
+    end
+
+    it "renders the 'upcoming' template" do
+      get :upcoming, valid_session
+      expect(response).to render_template("upcoming")
     end
   end
 
@@ -188,30 +203,30 @@ RSpec.describe MeetingsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        {date: Date.tomorrow}
+        {date: Date.tomorrow, description: 'The quick brown fox jumped over the lazy dog'}
       }
 
       context 'authorized' do 
+        let(:meeting) { FactoryGirl.create(:meeting) }
+
         before(:each) do 
-          @user = FactoryGirl.create(:user)
-          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+          user = FactoryGirl.create(:user)
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         end
 
         it "updates the requested meeting" do
-          meeting = FactoryGirl.create(:meeting)
           put :update, {:id => meeting.to_param, :meeting => new_attributes}, valid_session
           meeting.reload
           expect(meeting.date).to eq Date.tomorrow
+          expect(meeting.description).to eq 'The quick brown fox jumped over the lazy dog'
         end
 
         it "assigns the requested meeting as @meeting" do
-          meeting = FactoryGirl.create(:meeting)
           put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
           expect(assigns(:meeting)).to eq meeting
         end
 
         it "redirects to the meeting" do
-          meeting = FactoryGirl.create(:meeting)
           put :update, {:id => meeting.to_param, :meeting => valid_attributes}, valid_session
           expect(response).to redirect_to(meeting)
         end
