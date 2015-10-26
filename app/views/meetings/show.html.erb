@@ -3,7 +3,7 @@
 <div class='show-meeting'>
   <h2><%= @meeting.display_date %></h2>
   <h4><%= @meeting.time %></h4>
-
+  <p><%= @meeting.description %></p>
   <% if current_user %>
     <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
   <% end %>
