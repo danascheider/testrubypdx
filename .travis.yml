@@ -6,5 +6,6 @@ branches:
     - dev
     - staging
     - master
+sudo: false
 notifications:
   - email: false
