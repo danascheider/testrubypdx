@@ -16,3 +16,15 @@ Feature: Upcoming meetings page
     And there are 2 past meetings
     When I visit the "Upcoming Meetings" page
     Then I should see 1 meeting listed
+
+  Scenario: User is not logged in
+    Given I am not logged in
+    And there is 1 upcoming meeting
+    When I visit the "Upcoming Meetings" page
+    Then I should not see the text "Edit"
+
+  Scenario: User is logged in
+    Given I am logged in
+    And there is 1 upcoming meeting
+    When I visit the "Upcoming Meetings" page
+    Then I should see the text "Edit"
