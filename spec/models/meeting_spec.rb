@@ -44,4 +44,11 @@ RSpec.describe Meeting, type: :model do
       expect(meeting.display_date).to eql "Thursday, October 22, 2015"
     end
   end
+
+  describe 'time' do 
+    it 'returns the meeting time as a string' do
+      meeting = FactoryGirl.create(:meeting)
+      expect(meeting.time).to eql '6:12 pm'
+    end
+  end
 end

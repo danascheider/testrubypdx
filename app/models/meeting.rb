@@ -13,4 +13,9 @@ class Meeting < ActiveRecord::Base
 
     "#{weekday}, #{month} #{day}, #{year}"
   end
+
+  def time
+    datetime = date.to_datetime
+    datetime.strftime('%l:%M %P').lstrip
+  end
 end
