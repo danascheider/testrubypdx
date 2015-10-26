@@ -138,6 +138,16 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to("edit")
       end
     end
+
+    context "unauthorized" do 
+      let(:new_attributes) { {first_name: 'Bob' } }
+      it 'redirects to the login page' do 
+        user = FactoryGirl.create(:user, valid_attributes)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+        put :update, {:id => user.to_param, :user => new_attributes}, valid_session
+        expect(response).to redirect_to('/login')
+      end
+    end
   end
 
   describe "DELETE #destroy" do
