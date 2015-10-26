@@ -21,4 +21,14 @@ RSpec.describe User, type: :model do
     user.name = nil
     expect(user).not_to be_valid
   end
+
+  it 'is invalid without a password' do 
+    user.password = nil
+    expect(user).not_to be_valid
+  end
+
+  it 'is invalid without an e-mail' do 
+    user.email = nil
+    expect(user).not_to be_valid
+  end
 end
