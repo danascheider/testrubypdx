@@ -6,7 +6,7 @@ class Meeting < ActiveRecord::Base
 
   def display_date
     datetime = date.to_datetime
-    weekday = DateTime::DAYNAMES[datetime.cwday]
+    weekday = DateTime::DAYNAMES[datetime.cwday == 7 ? 0 : datetime.cwday]
     month = DateTime::MONTHNAMES[datetime.month]
     day = datetime.day
     year = datetime.year
