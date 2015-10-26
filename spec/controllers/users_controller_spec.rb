@@ -53,9 +53,22 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
+      user = FactoryGirl.create(:user, valid_attributes)
       get :edit, {:id => user.to_param}, valid_session
       expect(assigns(:user)).to eq(user)
+    end
+
+    context "unauthorized" do 
+      let(:user) { FactoryGirl.create(:user, valid_attributes) }
+      
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "routes to the loginpage" do 
+        get :edit, { :id => user.to_param }
+        expect(response).to redirect_to "/login"
+      end
     end
   end
 
@@ -195,8 +208,8 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'redirects to the login page' do 
-        user
-        
+        user # should exist before the delete request is made, for realism
+
         delete :destroy, {:id => user.to_param}, valid_session
         expect(response).to redirect_to '/login'
       end
