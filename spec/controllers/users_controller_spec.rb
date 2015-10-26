@@ -162,19 +162,44 @@ RSpec.describe UsersController, type: :controller do
   describe "DELETE #destroy" do
     let(:user) { FactoryGirl.create(:user, valid_attributes) }
 
-    before(:each) do 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    end
+    context 'authorized' do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      end
 
-    it "destroys the requested user" do
-      expect {
+      it "destroys the requested user" do
+        expect {
+          delete :destroy, {:id => user.to_param}, valid_session
+        }.to change(User, :count).by(-1)
+      end
+
+      it "redirects to the users list" do
         delete :destroy, {:id => user.to_param}, valid_session
-      }.to change(User, :count).by(-1)
+        expect(response).to redirect_to(users_url)
+      end
     end
 
-    it "redirects to the users list" do
-      delete :destroy, {:id => user.to_param}, valid_session
-      expect(response).to redirect_to(users_url)
+    context 'unauthorized' do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it 'doesn\'t destroy the requested user' do 
+        # `user` needs to be called outside the expect block so the user
+        # is not created in the block, which causes User.count to increment
+        user
+
+        expect{ 
+          delete :destroy, {:id => user.to_param}, valid_session
+        }.not_to change(User, :count)
+      end
+
+      it 'redirects to the login page' do 
+        user
+        
+        delete :destroy, {:id => user.to_param}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
