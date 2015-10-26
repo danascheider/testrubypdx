@@ -3,5 +3,8 @@
     <h3><%= link_to meeting.display_date, meeting_url(meeting) %></h3>
     <h4><%= meeting.time %></h4>
     <p><%= meeting.description %></p>
+    <% if current_user %>
+      <%= link_to 'Edit', edit_meeting_path(meeting) %>
+    <% end %>
   </div>
 <% end %>
