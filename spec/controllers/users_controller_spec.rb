@@ -160,8 +160,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "re-renders the 'edit' template" do
-        skip('Not sure why this is failing, because the functionality seems to work')
-        expect(response).to redirect_to("edit")
+        expect(response).to render_template("edit")
       end
     end
 
