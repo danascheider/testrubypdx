@@ -24,3 +24,7 @@ end
 Then /^I should be on the new meeting's view page$/ do 
   expect(current_path).to eql "/meetings/#{Meeting.last.id}"
 end
+
+Then /^I should see the meeting creation form$/ do 
+  expect(page).to have_css '#new_meeting'
+end
