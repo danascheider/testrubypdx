@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 2.2.3
 env: COVERAGE=true
+before_script:
+  - psql -c 'create database testrubypdx_test'
 branches:
   only:
     - dev

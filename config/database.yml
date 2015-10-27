@@ -20,6 +20,7 @@ development:
 test: &test
   <<: *default
   database: testrubypdx_test
+  username: postgres
 
 production:
   <<: *default
