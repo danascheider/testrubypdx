@@ -4,6 +4,11 @@ Feature: Create Meeting
   In order to attract attendees to upcoming events
   I need to add a meeting to the site.
 
+  Scenario: View form
+    Given I am logged in
+    When I visit '/meetings/new'
+    Then I should see the meeting creation form
+
   Scenario: Logged-in user creates a meeting
     Given I am logged in
     And there are no meetings
