@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize
+  before_filter :authorize, except: [ENV['RAILS_ENV'] == 'production' ? nil : :new, :create ]
 
   # GET /users/1
   # GET /users/1.json
