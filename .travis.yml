@@ -2,9 +2,9 @@ language: ruby
 rvm:
   - 2.2.3
 env: COVERAGE=true
-after_install:
-  - psql -c 'create database travis'
+before_script:
   - psql -c 'create database testrubypdx_test'
+  - rake db:setup
 branches:
   only:
     - dev
