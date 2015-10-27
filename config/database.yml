@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: dana
+  username: postgres
   pool: 5
   timeout: 5000
 
@@ -15,7 +15,6 @@ development:
 test: &test
   <<: *default
   database: testrubypdx_test
-  username: dana
 
 production:
   <<: *default
