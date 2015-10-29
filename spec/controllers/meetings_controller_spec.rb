@@ -53,6 +53,7 @@ RSpec.describe MeetingsController, type: :controller do
   describe "GET #new" do
     context "authorized" do 
       before(:each) do 
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
       end
 
@@ -89,6 +90,7 @@ RSpec.describe MeetingsController, type: :controller do
       let(:meeting) { FactoryGirl.create(:meeting) }
 
       before(:each) do 
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
       end
 
@@ -147,6 +149,7 @@ RSpec.describe MeetingsController, type: :controller do
   describe "POST #create" do
     context "authorized" do 
       before(:each) do 
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
       end
 
@@ -211,6 +214,7 @@ RSpec.describe MeetingsController, type: :controller do
 
         before(:each) do 
           user = FactoryGirl.create(:user)
+          allow(user).to receive(:id).and_return(1)
           allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         end
 
@@ -255,6 +259,7 @@ RSpec.describe MeetingsController, type: :controller do
     context "with invalid params" do
       context 'authorized' do 
         before(:each) do 
+          allow_any_instance_of(User).to receive(:id).and_return(1)
           allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
         end
 
@@ -276,6 +281,7 @@ RSpec.describe MeetingsController, type: :controller do
   describe "DELETE #destroy" do
     context 'authorized' do 
       before(:each) do 
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
       end
 
