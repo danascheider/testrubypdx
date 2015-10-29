@@ -24,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: 'user123', password: 'foobarbaz', email: 'foobar@baz.com'}
+    {id: 1, name: 'user123', password: 'foobarbaz', email: 'foobar@baz.com'}
   }
 
   let(:invalid_attributes) {
@@ -126,8 +126,6 @@ RSpec.describe UsersController, type: :controller do
 
       it "updates the requested user" do
         user = FactoryGirl.create(:user, valid_attributes)
-        allow(user).to receive(:id).and_return(1)
-        allow(User).to receive(:find).and_return(user)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
@@ -142,9 +140,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "redirects to the user" do
-        user = FactoryGirl.create(:user)
-        allow(User).to receive(:find).and_return(user)
-        allow(user).to receive(:id).and_return(1)
+        user = FactoryGirl.create(:user, valid_attributes)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         expect(response).to redirect_to(user)
@@ -155,8 +151,6 @@ RSpec.describe UsersController, type: :controller do
       let(:user) { FactoryGirl.create(:user, valid_attributes) }
 
       before(:each) do 
-        allow(User).to receive(:find).and_return(user)
-        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
       end
@@ -193,22 +187,22 @@ RSpec.describe UsersController, type: :controller do
   describe "DELETE #destroy" do
     let(:user) { FactoryGirl.create(:user, valid_attributes) }
 
+    let(:orig_id) { user.id }
+
     context 'authorized' do 
       before(:each) do 
-        allow(User).to receive(:find).and_return(user)
-        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       end
 
       it "destroys the requested user" do
-        expect {
+        expect{
           delete :destroy, {:id => user.to_param}, valid_session
         }.to change(User, :count).by(-1)
       end
 
-      it "redirects to the users list" do
+      it "redirects to the homepage" do
         delete :destroy, {:id => user.to_param}, valid_session
-        expect(response).to redirect_to(users_url)
+        expect(response).to redirect_to('/')
       end
     end
 
