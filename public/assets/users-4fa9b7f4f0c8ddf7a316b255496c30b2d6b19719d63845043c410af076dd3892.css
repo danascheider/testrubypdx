@@ -1,0 +1,45 @@
+/* line 5, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+table {
+  width: 100%;
+}
+/* line 8, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+table tr > th {
+  min-width: 15%;
+}
+
+/* line 14, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#new_user table, #login-form table, #new-meeting table, .edit_user table {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 19, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#new_user th, #new_user td, #login-form th, #login-form td, #new-meeting th, #new-meeting td, .edit_user th, .edit_user td {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+/* line 23, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#new_user .field, #new_user .actions, #login-form .field, #login-form .actions, #new-meeting .field, #new-meeting .actions, .edit_user .field, .edit_user .actions {
+  box-sizing: border-box;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/* line 28, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#new_user .field input, #new_user .field select, #login-form .field input, #login-form .field select, #new-meeting .field input, #new-meeting .field select, .edit_user .field input, .edit_user .field select {
+  width: 100%;
+}
+
+/* line 34, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#about-us .inset-picture {
+  position: relative;
+  float: left;
+  display: inline;
+  clear: both;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+/* line 43, /Users/dana/Development/testrubypdx/app/assets/stylesheets/users.scss */
+#about-us p {
+  display: inline;
+  position: relative;
+}

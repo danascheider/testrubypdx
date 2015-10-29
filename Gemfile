@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -57,9 +57,6 @@ group :development, :test do
   # Check test coverage using SimpleCov and Coveralls
   gem 'simplecov', '~> 0.10'
   gem 'coveralls', '~> 0.8'
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
 end
 
 group :development do
