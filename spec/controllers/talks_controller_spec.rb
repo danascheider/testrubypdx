@@ -24,11 +24,11 @@ RSpec.describe TalksController, type: :controller do
   # Talk. As you add validations to Talk, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'MiniTest Is the Best' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,7 +38,7 @@ RSpec.describe TalksController, type: :controller do
 
   describe "GET #index" do
     it "assigns all talks as @talks" do
-      talk = Talk.create! valid_attributes
+      talk = FactoryGirl.create(:talk, valid_attributes)
       get :index, {}, valid_session
       expect(assigns(:talks)).to eq([talk])
     end
@@ -46,7 +46,7 @@ RSpec.describe TalksController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested talk as @talk" do
-      talk = Talk.create! valid_attributes
+      talk = FactoryGirl.create(:talk, valid_attributes)
       get :show, {:id => talk.to_param}, valid_session
       expect(assigns(:talk)).to eq(talk)
     end
@@ -61,7 +61,7 @@ RSpec.describe TalksController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested talk as @talk" do
-      talk = Talk.create! valid_attributes
+      talk = FactoryGirl.create(:talk, valid_attributes)
       get :edit, {:id => talk.to_param}, valid_session
       expect(assigns(:talk)).to eq(talk)
     end
@@ -103,24 +103,24 @@ RSpec.describe TalksController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: 'This talk will be awesome' }
       }
 
       it "updates the requested talk" do
-        talk = Talk.create! valid_attributes
+        talk = FactoryGirl.create(:talk, valid_attributes)
         put :update, {:id => talk.to_param, :talk => new_attributes}, valid_session
         talk.reload
-        skip("Add assertions for updated state")
+        expect(talk.description).to eql 'This talk will be awesome'
       end
 
       it "assigns the requested talk as @talk" do
-        talk = Talk.create! valid_attributes
+        talk = FactoryGirl.create(:talk, valid_attributes)
         put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
         expect(assigns(:talk)).to eq(talk)
       end
 
       it "redirects to the talk" do
-        talk = Talk.create! valid_attributes
+        talk = FactoryGirl.create(:talk, valid_attributes)
         put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
         expect(response).to redirect_to(talk)
       end
@@ -128,13 +128,13 @@ RSpec.describe TalksController, type: :controller do
 
     context "with invalid params" do
       it "assigns the talk as @talk" do
-        talk = Talk.create! valid_attributes
+        talk = FactoryGirl.create(:talk, valid_attributes)
         put :update, {:id => talk.to_param, :talk => invalid_attributes}, valid_session
         expect(assigns(:talk)).to eq(talk)
       end
 
       it "re-renders the 'edit' template" do
-        talk = Talk.create! valid_attributes
+        talk = FactoryGirl.create(:talk, valid_attributes)
         put :update, {:id => talk.to_param, :talk => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -143,14 +143,14 @@ RSpec.describe TalksController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested talk" do
-      talk = Talk.create! valid_attributes
+      talk = FactoryGirl.create(:talk, valid_attributes)
       expect {
         delete :destroy, {:id => talk.to_param}, valid_session
       }.to change(Talk, :count).by(-1)
     end
 
     it "redirects to the talks list" do
-      talk = Talk.create! valid_attributes
+      talk = FactoryGirl.create(:talk, valid_attributes)
       delete :destroy, {:id => talk.to_param}, valid_session
       expect(response).to redirect_to(talks_url)
     end
