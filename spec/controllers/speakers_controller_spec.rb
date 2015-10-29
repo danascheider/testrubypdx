@@ -38,7 +38,7 @@ RSpec.describe SpeakersController, type: :controller do
 
   describe "GET #index" do
     it "assigns all speakers as @speakers" do
-      speaker = Speaker.create! valid_attributes
+      speaker = FactoryGirl.create(:speaker, valid_attributes)
       get :index, {}, valid_session
       expect(assigns(:speakers)).to eq([speaker])
     end
@@ -46,7 +46,7 @@ RSpec.describe SpeakersController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested speaker as @speaker" do
-      speaker = Speaker.create! valid_attributes
+      speaker = FactoryGirl.create(:speaker, valid_attributes)
       get :show, {:id => speaker.to_param}, valid_session
       expect(assigns(:speaker)).to eq(speaker)
     end
@@ -61,7 +61,7 @@ RSpec.describe SpeakersController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested speaker as @speaker" do
-      speaker = Speaker.create! valid_attributes
+      speaker = FactoryGirl.create(:speaker, valid_attributes)
       get :edit, {:id => speaker.to_param}, valid_session
       expect(assigns(:speaker)).to eq(speaker)
     end
@@ -103,24 +103,24 @@ RSpec.describe SpeakersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {company: 'Puppet Labs'}
       }
 
       it "updates the requested speaker" do
-        speaker = Speaker.create! valid_attributes
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
         put :update, {:id => speaker.to_param, :speaker => new_attributes}, valid_session
         speaker.reload
-        skip("Add assertions for updated state")
+        expect(speaker.company).to eql 'Puppet Labs'
       end
 
       it "assigns the requested speaker as @speaker" do
-        speaker = Speaker.create! valid_attributes
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
         put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
         expect(assigns(:speaker)).to eq(speaker)
       end
 
       it "redirects to the speaker" do
-        speaker = Speaker.create! valid_attributes
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
         put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
         expect(response).to redirect_to(speaker)
       end
@@ -128,13 +128,13 @@ RSpec.describe SpeakersController, type: :controller do
 
     context "with invalid params" do
       it "assigns the speaker as @speaker" do
-        speaker = Speaker.create! valid_attributes
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
         put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
         expect(assigns(:speaker)).to eq(speaker)
       end
 
       it "re-renders the 'edit' template" do
-        speaker = Speaker.create! valid_attributes
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
         put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -143,14 +143,14 @@ RSpec.describe SpeakersController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested speaker" do
-      speaker = Speaker.create! valid_attributes
+      speaker = FactoryGirl.create(:speaker, valid_attributes)
       expect {
         delete :destroy, {:id => speaker.to_param}, valid_session
       }.to change(Speaker, :count).by(-1)
     end
 
     it "redirects to the speakers list" do
-      speaker = Speaker.create! valid_attributes
+      speaker = FactoryGirl.create(:speaker, valid_attributes)
       delete :destroy, {:id => speaker.to_param}, valid_session
       expect(response).to redirect_to(speakers_url)
     end
