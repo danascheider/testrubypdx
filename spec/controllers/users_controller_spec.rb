@@ -126,6 +126,8 @@ RSpec.describe UsersController, type: :controller do
 
       it "updates the requested user" do
         user = FactoryGirl.create(:user, valid_attributes)
+        allow(user).to receive(:id).and_return(1)
+        allow(User).to receive(:find).and_return(user)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
@@ -140,7 +142,9 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "redirects to the user" do
-        user = FactoryGirl.create(:user, valid_attributes)
+        user = FactoryGirl.create(:user)
+        allow(User).to receive(:find).and_return(user)
+        allow(user).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         expect(response).to redirect_to(user)
@@ -151,6 +155,8 @@ RSpec.describe UsersController, type: :controller do
       let(:user) { FactoryGirl.create(:user, valid_attributes) }
 
       before(:each) do 
+        allow(User).to receive(:find).and_return(user)
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
       end
@@ -189,6 +195,8 @@ RSpec.describe UsersController, type: :controller do
 
     context 'authorized' do 
       before(:each) do 
+        allow(User).to receive(:find).and_return(user)
+        allow_any_instance_of(User).to receive(:id).and_return(1)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       end
 
