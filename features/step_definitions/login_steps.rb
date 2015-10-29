@@ -1,9 +1,3 @@
-Given /^I am a registered user$/ do 
-  step 'I visit the "Create a User" page'
-  step 'I submit the creation form with valid information'
-  @user = User.last
-end
-
 Given /^I am on the login page$/ do 
   visit '/login'
 end
