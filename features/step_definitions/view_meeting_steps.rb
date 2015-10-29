@@ -3,8 +3,9 @@ Given /^there (?:is|are) (\d+) meetings?$/ do |count|
 end
 
 Given /^the meeting has (\d+) talks$/ do |count|
+  @talks = []
   count.to_i.times do 
-    FactoryGirl.create(:talk, meeting_id: @meeting.id)
+    @talks << FactoryGirl.create(:talk, meeting_id: @meeting.id)
   end
 end
 
@@ -15,3 +16,7 @@ end
 Then /^I should see the meeting's (\w+)$/ do |attr|
   expect(page).to have_content(@meeting.send(attr.to_sym))
 end 
+
+Then /^I should see information about the talks$/ do 
+  expect(page).to have_css '.talk', count: @talks.length
+end
