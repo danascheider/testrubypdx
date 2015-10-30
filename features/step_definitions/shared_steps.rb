@@ -15,3 +15,7 @@ Given /^I am a registered user$/ do
   step 'I submit the creation form with valid information'
   @user = User.last
 end
+
+Then /^I should be on the '(.*)' page$/ do |path|
+  expect(current_path).to eql path
+end

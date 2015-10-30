@@ -53,9 +53,27 @@ RSpec.describe TalksController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new talk as @talk" do
-      get :new, {}, valid_session
-      expect(assigns(:talk)).to be_a_new(Talk)
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user, id: 1))
+      end
+
+      it "assigns a new talk as @talk" do
+        get :new, {}, valid_session
+        expect(assigns(:talk)).to be_a_new(Talk)
+      end
+
+      it "renders the new talk form" do 
+        get :new, {}, valid_session
+        expect(response).to render_template('talks/new')
+      end
+    end
+
+    context "unauthorized" do 
+      it "redirects to the login page" do 
+        get :new, {}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 

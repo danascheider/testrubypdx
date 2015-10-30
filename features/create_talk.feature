@@ -19,3 +19,8 @@ Feature: Create talk
     And I submit the new talk form
     Then I should see the '#new_talk' form
     And I should see a message that the talk needs a title
+
+  Scenario: User navigates to talk creation page without logging in
+    Given I am not logged in
+    When I visit '/talks/new'
+    Then I should be on the '/login' page
