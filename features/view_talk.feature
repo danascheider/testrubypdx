@@ -15,6 +15,7 @@ Feature: View talk
     And I should see the talk's description
     And I should see the speaker's name
     And I should not see the 'Edit' link
+    And I should not see the 'Delete' link
 
   Scenario: User is logged in
 
@@ -28,3 +29,4 @@ Feature: View talk
     And I should see the talk's description
     And I should see the speaker's name
     And I should see the 'Edit' link
+    And I should see the 'Destroy' link

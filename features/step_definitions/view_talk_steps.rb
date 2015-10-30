@@ -10,10 +10,10 @@ Then /^I should see the speaker's name$/ do
   expect(page).to have_content @talk.speaker.name
 end
 
-Then /^I should see the 'Edit' link$/ do 
-  expect(page).to have_link 'Edit'
+Then /^I should see the '(.*)' link$/ do |text|
+  expect(page).to have_link text
 end
 
-Then /^I should not see the 'Edit' link$/ do 
-  expect(page).not_to have_link 'Edit'
+Then /^I should not see the '(.*)' link$/ do |text|
+  expect(page).not_to have_link text
 end
