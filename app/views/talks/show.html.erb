@@ -1,14 +1,17 @@
+<h2><%= @talk.title %></h2>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @talk.title %>
-</p>
+<% if @talk.speaker %>
+  <h3><%= @talk.speaker.name %></h3>
+<% end %>
 
 <p>
   <strong>Description:</strong>
   <%= @talk.description %>
 </p>
 
-<%= link_to 'Edit', edit_talk_path(@talk) %> |
+<% if current_user %>
+  <%= link_to 'Edit', edit_talk_path(@talk) %> |
+<% end %>
 <%= link_to 'Back', talks_path %>
