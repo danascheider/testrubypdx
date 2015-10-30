@@ -86,34 +86,52 @@ RSpec.describe TalksController, type: :controller do
   end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Talk" do
-        expect {
+    context "authorized" do 
+      before(:each) do 
+        user = FactoryGirl.create(:user, id: 1)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      end
+
+      context "with valid params" do
+        it "creates a new Talk" do
+          expect {
+            post :create, {:talk => valid_attributes}, valid_session
+          }.to change(Talk, :count).by(1)
+        end
+
+        it "assigns a newly created talk as @talk" do
           post :create, {:talk => valid_attributes}, valid_session
-        }.to change(Talk, :count).by(1)
+          expect(assigns(:talk)).to be_a(Talk)
+          expect(assigns(:talk)).to be_persisted
+        end
+
+        it "redirects to the created talk" do
+          post :create, {:talk => valid_attributes}, valid_session
+          expect(response).to redirect_to(Talk.last)
+        end
       end
 
-      it "assigns a newly created talk as @talk" do
-        post :create, {:talk => valid_attributes}, valid_session
-        expect(assigns(:talk)).to be_a(Talk)
-        expect(assigns(:talk)).to be_persisted
-      end
+      context "with invalid params" do
+        it "assigns a newly created but unsaved talk as @talk" do
+          post :create, {:talk => invalid_attributes}, valid_session
+          expect(assigns(:talk)).to be_a_new(Talk)
+        end
 
-      it "redirects to the created talk" do
-        post :create, {:talk => valid_attributes}, valid_session
-        expect(response).to redirect_to(Talk.last)
+        it "re-renders the 'new' template" do
+          post :create, {:talk => invalid_attributes}, valid_session
+          expect(response).to render_template("new")
+        end
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved talk as @talk" do
-        post :create, {:talk => invalid_attributes}, valid_session
-        expect(assigns(:talk)).to be_a_new(Talk)
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:talk => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      it "redirects to the login page" do 
+        post :create, {:talk => valid_attributes}, valid_session
+        expect(response).to redirect_to '/login'
       end
     end
   end
