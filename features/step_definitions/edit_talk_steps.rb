@@ -22,3 +22,11 @@ Then /^the talk's (\S*) should be '([^']*)'$/ do |attribute, value|
   @talk.reload
   expect(@talk.send(attribute.to_sym)).to eql value
 end
+
+Then /^I should see the '#edit_talk' form$/ do 
+  expect(page).to have_selector "#edit_talk_#{@talk.id}"
+end
+
+And /^I should see a message that the talk's title can't be blank$/ do 
+  expect(page).to have_content 'Title can\'t be blank'
+end
