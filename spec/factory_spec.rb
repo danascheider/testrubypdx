@@ -48,4 +48,14 @@ describe 'factories' do
       end
     end
   end
+
+  describe 'talk' do 
+    context 'basic' do 
+      let(:talk) { FactoryGirl.create(:talk) }
+
+      it 'has a title' do 
+        expect(talk.title).not_to be_nil
+      end
+    end
+  end
 end
