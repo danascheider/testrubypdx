@@ -28,3 +28,7 @@ end
 Then /^I should see the meeting creation form$/ do 
   expect(page).to have_css '#new_meeting'
 end
+
+Then /^I should have the option to create a talk$/ do 
+  expect(page).to have_link 'Add a talk'
+end

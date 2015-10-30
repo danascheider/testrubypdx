@@ -8,6 +8,7 @@ Feature: Create Meeting
     Given I am logged in
     When I visit '/meetings/new'
     Then I should see the meeting creation form
+    And I should have the option to create a talk
 
   Scenario: Logged-in user creates a meeting
     Given I am logged in
