@@ -15,4 +15,12 @@ RSpec.describe Speaker, type: :model do
       expect(speaker).not_to be_valid
     end
   end
+
+  describe "#name" do 
+    let(:speaker) { FactoryGirl.create(:speaker, first_name: 'Isabel', last_name: 'Allende') }
+
+    it "returns the speaker's full name" do 
+      expect(speaker.name).to eql 'Isabel Allende'
+    end
+  end
 end
