@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe TalksController, type: :controller do
+  let(:user) { FactoryGirl.create(:user, id: 1) }
+
   let(:valid_attributes) {
     { title: 'MiniTest Is the Best' }
   }
@@ -9,9 +11,6 @@ RSpec.describe TalksController, type: :controller do
     { title: nil }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TalksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -56,10 +55,34 @@ RSpec.describe TalksController, type: :controller do
   end
 
   describe "GET #edit" do
-    it "assigns the requested talk as @talk" do
-      talk = FactoryGirl.create(:talk, valid_attributes)
-      get :edit, {:id => talk.to_param}, valid_session
-      expect(assigns(:talk)).to eq(talk)
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      end
+
+      it "assigns the requested talk as @talk" do
+        talk = FactoryGirl.create(:talk, valid_attributes)
+        get :edit, {:id => talk.to_param}, valid_session
+        expect(assigns(:talk)).to eq(talk)
+      end
+
+      it "renders the view" do 
+        talk = FactoryGirl.create(:talk, valid_attributes)
+        get :edit, {:id => talk.to_param}, valid_session
+        expect(response).to render_template 'edit'
+      end
+    end
+
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "redirects to the /login page" do 
+        talk = FactoryGirl.create(:talk, valid_attributes)
+        get :edit, {:id => talk.to_param}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
@@ -120,37 +143,56 @@ RSpec.describe TalksController, type: :controller do
         { description: 'This talk will be awesome' }
       }
 
-      it "updates the requested talk" do
-        talk = FactoryGirl.create(:talk, valid_attributes)
-        put :update, {:id => talk.to_param, :talk => new_attributes}, valid_session
-        talk.reload
-        expect(talk.description).to eql 'This talk will be awesome'
+      context "authorized" do 
+        before(:each) do 
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+        end
+
+        it "updates the requested talk" do
+          talk = FactoryGirl.create(:talk, valid_attributes)
+          put :update, {:id => talk.to_param, :talk => new_attributes}, valid_session
+          talk.reload
+          expect(talk.description).to eql 'This talk will be awesome'
+        end
+
+        it "assigns the requested talk as @talk" do
+          talk = FactoryGirl.create(:talk, valid_attributes)
+          put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
+          expect(assigns(:talk)).to eq(talk)
+        end
+
+        it "redirects to the talk" do
+          talk = FactoryGirl.create(:talk, valid_attributes)
+          put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
+          expect(response).to redirect_to(talk)
+        end
       end
 
-      it "assigns the requested talk as @talk" do
-        talk = FactoryGirl.create(:talk, valid_attributes)
-        put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
-        expect(assigns(:talk)).to eq(talk)
-      end
-
-      it "redirects to the talk" do
-        talk = FactoryGirl.create(:talk, valid_attributes)
-        put :update, {:id => talk.to_param, :talk => valid_attributes}, valid_session
-        expect(response).to redirect_to(talk)
+      context "with invalid params" do
+        it "assigns the talk as @talk" do
+          talk = FactoryGirl.create(:talk, valid_attributes)
+          put :update, {:id => talk.to_param, :talk => invalid_attributes}, valid_session
+          expect(assigns(:talk)).to eq(talk)
+        end
       end
     end
 
-    context "with invalid params" do
-      it "assigns the talk as @talk" do
+    context "unauthorized" do 
+      let(:new_attributes) {
+        { :description => 'This talk will be awesome' }
+      }
+
+      it "redirects to the login page" do 
         talk = FactoryGirl.create(:talk, valid_attributes)
-        put :update, {:id => talk.to_param, :talk => invalid_attributes}, valid_session
-        expect(assigns(:talk)).to eq(talk)
+        put :update, {:id => talk.to_param, :talk => new_attributes}, valid_session
+        expect(response).to redirect_to '/login'
       end
 
-      it "re-renders the 'edit' template" do
+      it "doesn't update the talk" do 
         talk = FactoryGirl.create(:talk, valid_attributes)
-        put :update, {:id => talk.to_param, :talk => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        put :update, {:id => talk.to_param, :talk => new_attributes}, valid_session
+        talk.reload
+        expect(talk.description).not_to eql 'This talk will be awesome'
       end
     end
   end

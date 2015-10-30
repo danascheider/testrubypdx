@@ -1,6 +1,6 @@
 class TalksController < ApplicationController
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize, only: [:new, :create]
+  before_filter :authorize, only: [:new, :create, :edit, :update]
 
   # GET /talks
   # GET /talks.json
