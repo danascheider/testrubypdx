@@ -4,6 +4,12 @@
   <h2><%= @meeting.display_date %></h2>
   <h4><%= @meeting.time %></h4>
   <p><%= @meeting.description %></p>
+  <% @meeting.talks.each do |talk| %>
+    <div class='talk'>
+      <h4><%= talk.title %></h4>
+      <p><%= talk.description %></p>
+    </div>
+  <% end %>
   <% if current_user %>
     <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
   <% end %>

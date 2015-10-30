@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "talks/show", type: :view do
   before(:each) do
-    @talk = assign(:talk, Talk.create!(
+    @talk = assign(:talk, FactoryGirl.create(:talk,
       :title => "Title",
       :description => "Description"
     ))
@@ -10,7 +10,12 @@ RSpec.describe "talks/show", type: :view do
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/Title/)
-    expect(rendered).to match(/Description/)
+    expect(rendered).to have_content @talk.title
+    expect(rendered).to have_content @talk.description
+  end
+
+  it "includes the speaker's name" do 
+    render
+    expect(rendered).to have_content @talk.speaker.name
   end
 end
