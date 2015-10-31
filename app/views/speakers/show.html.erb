@@ -1,24 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @speaker.first_name %>
-</p>
+<div id="speaker_<%= @speaker.id %>_profile">
+  <p>
+    <strong>First name:</strong>
+    <%= @speaker.first_name %>
+  </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @speaker.last_name %>
-</p>
+  <p>
+    <strong>Last name:</strong>
+    <%= @speaker.last_name %>
+  </p>
 
-<p>
-  <strong>Website:</strong>
-  <%= @speaker.website %>
-</p>
+  <p>
+    <strong>Website:</strong>
+    <%= @speaker.website %>
+  </p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @speaker.company %>
-</p>
+  <p>
+    <strong>Company:</strong>
+    <%= @speaker.company %>
+  </p>
+  <p>
+    <strong>Bio:</strong>
+    <%= @speaker.bio %>
+  </p>
+  <% if @speaker.talks %>
+    <h4>Talks</h4>
+    <% @speaker.talks.each do |talk| %>
+      <p>
+        <strong><%= link_to talk.title, talk_url(talk) %></strong>
+        <%= talk.description %>
+      </p>
+    <% end %>
+  <% end %>
 
-<%= link_to 'Edit', edit_speaker_path(@speaker) %> |
-<%= link_to 'Back', speakers_path %>
+
+  <%= link_to 'Edit', edit_speaker_path(@speaker) %> |
+  <%= link_to 'Back', speakers_path %>
+</div>
