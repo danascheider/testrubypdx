@@ -21,8 +21,10 @@
         <td><%= speaker.website %></td>
         <td><%= speaker.company %></td>
         <td><%= link_to 'Show', speaker %></td>
-        <td><%= link_to 'Edit', edit_speaker_path(speaker) %></td>
-        <td><%= link_to 'Destroy', speaker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user %>
+          <td><%= link_to 'Edit', edit_speaker_path(speaker) %></td>
+          <td><%= link_to 'Destroy', speaker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
