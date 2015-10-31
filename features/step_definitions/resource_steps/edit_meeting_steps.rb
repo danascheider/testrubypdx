@@ -31,3 +31,7 @@ end
 Then /^I should be on the meeting's edit page$/ do 
   expect(current_path).to eql edit_meeting_path(@meeting)
 end
+
+Then /^I should not see the meeting's edit form$/ do 
+  expect(page).not_to have_selector "#edit_meeting_#{@meeting.id}"
+end

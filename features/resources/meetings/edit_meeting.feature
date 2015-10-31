@@ -24,3 +24,9 @@ Feature: Edit meeting
       |      |
     Then the meeting's date should not be blank
     And I should be on the meeting's view page
+
+  Scenario: Visitor tries to edit meeting
+    Given I am not logged in
+    And I visit the meeting's edit page
+    Then I should not see the meeting's edit form
+    And I should be on the '/login' page
