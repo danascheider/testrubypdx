@@ -26,3 +26,11 @@ end
 Then /^I should not see the speaker's edit form$/ do 
   expect(page).not_to have_selector "#edit_speaker_#{@speaker.id}"
 end
+
+Then /^the speaker's first name should not be blank$/ do 
+  expect(@speaker.first_name).not_to be_blank
+end
+
+Then /^I should be on the speaker's view page$/ do 
+  expect(current_path).to eql speaker_path(@speaker)
+end

@@ -22,3 +22,12 @@ Feature: Edit speaker profile
     When I visit the speaker's edit page
     Then I should not see the speaker's edit form
     And I should be on the '/login' page
+
+  Scenario: Speaker updated with blank first name
+    Given I am logged in
+    When I visit the speaker's edit page
+    And I submit the speaker's edit form with the following data:
+      | first_name | last_name |
+      |            | Keats     |
+    Then the speaker's first name should not be blank
+    And I should be on the speaker's view page
