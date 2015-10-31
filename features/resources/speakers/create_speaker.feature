@@ -16,6 +16,15 @@ Feature: Add a speaker
       | Dana       | Scheider  | https://tessitura.io |
     Then there should be a new speaker named "Dana Scheider"
 
+  Scenario: Admin creates a speaker with invalid attributes
+    Given I am logged in
+    When I visit '/speakers/new'
+    And I submit the '#new_speaker' form with the following data:
+      | last_name |
+      | Barclay   |
+    Then there should be no speakers
+    And I should see a message that the first name can't be blank 
+
   Scenario: Visitor tries to create a speaker
     Given I am not logged in
     When I visit '/speakers/new'
