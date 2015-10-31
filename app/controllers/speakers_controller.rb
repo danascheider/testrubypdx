@@ -1,5 +1,6 @@
 class SpeakersController < ApplicationController
   before_action :set_speaker, only: [:show, :edit, :update, :destroy]
+  before_filter :authorize, only: [:new, :create]
 
   # GET /speakers
   # GET /speakers.json
