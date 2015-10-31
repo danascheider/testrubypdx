@@ -19,6 +19,15 @@ Then /^the meeting's (\S+) should be '([^']*)'$/ do |attribute, value|
   expect(@meeting.send(attribute.to_sym)).to eql value
 end
 
+Then /^the meeting's date should not be blank$/ do 
+  @meeting.reload
+  expect(@meeting.date).not_to be_blank
+end
+
 Then /^I should be on the meeting's view page$/ do 
   expect(current_path).to eql meeting_path(@meeting)
+end
+
+Then /^I should be on the meeting's edit page$/ do 
+  expect(current_path).to eql edit_meeting_path(@meeting)
 end
