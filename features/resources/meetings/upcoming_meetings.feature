@@ -21,10 +21,12 @@ Feature: Upcoming meetings page
     Given I am not logged in
     And there is 1 upcoming meeting
     When I visit the "Upcoming Meetings" page
-    Then I should not see the text "Edit"
+    Then I should not see the 'Edit' link
+    And I should not see the 'Destroy' link
 
   Scenario: User is logged in
     Given I am logged in
     And there is 1 upcoming meeting
     When I visit the "Upcoming Meetings" page
-    Then I should see the text "Edit"
+    Then I should see the 'Edit' link
+    And I should see the 'Destroy' link
