@@ -1,9 +1,17 @@
-Given(/^I am not logged in$/) do 
+Given /^I am not logged in$/ do 
   ensure_logged_out
 end
 
-Given(/^I am logged in$/) do 
+Given /^I am logged in$/ do 
   ensure_logged_in
+end
+
+Given /^I'm logged in$/ do 
+  step "I am logged in"
+end
+
+Given /^I'm not logged in$/ do 
+  step "I am not logged in"
 end
 
 When /^I visit '(\S*)'$/ do |path|
