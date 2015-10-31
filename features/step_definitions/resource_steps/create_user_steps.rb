@@ -2,6 +2,10 @@ Given /^there are no users$/ do
   User.count == 0
 end
 
+Given /^there are (\d+) users$/ do |count|
+  FactoryGirl.create_list(:user, count.to_i)
+end
+
 When /^I visit the "Create a User" page$/ do 
   visit '/users/new'
 end
@@ -18,4 +22,8 @@ end
 
 Then /^there should be (\d+) users?$/ do |num|
   expect(User.count).to eql num.to_i
+end
+
+Then /^I should not see the user creation form$/ do 
+  expect(page).not_to have_selector '#new_user'
 end

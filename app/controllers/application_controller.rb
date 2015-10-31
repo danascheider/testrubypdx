@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to '/login' unless current_user && current_user.id == 1
   end
+
+  def authorize_user_creation
+    redirect_to '/login' unless current_user || User.count == 0
+  end
 end
