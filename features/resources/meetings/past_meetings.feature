@@ -12,10 +12,12 @@ Feature: Past meetings page
     And there is 1 upcoming meeting
     When I visit the 'Past Meetings' page
     Then I should see 2 meetings listed
+    And I should not see the 'Edit' link
+    And I should not see the 'Destroy' link
 
-  Scenario: User is not logged in
-    Given I am not logged in
+  Scenario: User is logged in
+    Given I am logged in
     And there are 2 past meetings
     When I visit the 'Past Meetings' page
-    Then I should not see the text "Edit"
-    And I should not see the text "Delete"
+    Then I should see the 'Edit' link
+    And I should see the 'Destroy' link
