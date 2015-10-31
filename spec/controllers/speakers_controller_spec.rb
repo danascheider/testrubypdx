@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SpeakersController, type: :controller do
+  let(:user) { FactoryGirl.create(:user, id: 1) }
 
   let(:valid_attributes) {
     {first_name: 'Craig', last_name: 'Smith'}
@@ -31,7 +32,7 @@ RSpec.describe SpeakersController, type: :controller do
   describe "GET #new" do
     context "authorized" do 
       before(:each) do 
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user, id: 1))
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       end
 
       it "assigns a new speaker as @speaker" do
@@ -58,10 +59,34 @@ RSpec.describe SpeakersController, type: :controller do
   end
 
   describe "GET #edit" do
-    it "assigns the requested speaker as @speaker" do
-      speaker = FactoryGirl.create(:speaker, valid_attributes)
-      get :edit, {:id => speaker.to_param}, valid_session
-      expect(assigns(:speaker)).to eq(speaker)
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      end
+
+      it "assigns the requested speaker as @speaker" do
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
+        get :edit, {:id => speaker.to_param}, valid_session
+        expect(assigns(:speaker)).to eq(speaker)
+      end
+
+      it "renders the edit form" do 
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
+        get :edit, {:id => speaker.to_param}, valid_session
+        expect(response).to render_template 'edit'
+      end
+    end
+
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "redirects to login" do 
+        speaker = FactoryGirl.create(:speaker, valid_attributes)
+        get :edit, {:id => speaker.to_param}, valid_session
+        expect(response).to redirect_to '/login'
+      end
     end
   end
 
