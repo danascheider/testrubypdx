@@ -6,8 +6,12 @@ Then /^I should see the talk's (\S+)$/ do |attribute|
   expect(page).to have_content @talk.send(attribute.to_sym)
 end
 
-Then /^I should see the speaker's name$/ do
-  expect(page).to have_content @talk.speaker.name
+Then /^I should see the speaker's (\S+)$/ do |attribute|
+  if @speaker
+    expect(page).to have_content @speaker.send(attribute.to_sym)
+  else
+    expect(page).to have_content @talk.speaker.send(attribute.to_sym)
+  end
 end
 
 Then /^I should see the '(.*)' link$/ do |text|
