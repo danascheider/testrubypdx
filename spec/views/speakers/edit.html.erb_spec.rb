@@ -22,6 +22,8 @@ RSpec.describe "speakers/edit", type: :view do
       assert_select "input#speaker_website[name=?]", "speaker[website]"
 
       assert_select "input#speaker_company[name=?]", "speaker[company]"
+
+      assert_select "textarea#speaker_bio[name=?]", "speaker[bio]"
     end
   end
 end
