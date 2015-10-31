@@ -12,6 +12,7 @@
   <% end %>
   <% if current_user %>
     <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+    <%= link_to 'Destroy', @meeting, method: :delete, data: { confirm: 'Are you sure?' } %> |
   <% end %>
     <% destination = @meeting.date < Date.today ? past_meetings_path : upcoming_meetings_path %>
     <%= link_to 'Back', destination %>

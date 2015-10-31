@@ -19,6 +19,11 @@ RSpec.describe "meetings/show", type: :view do
     expect(rendered).not_to have_link 'Edit'
   end
 
+  it "doesn't show a destroy link" do 
+    render
+    expect(rendered).not_to have_link 'Destroy'
+  end
+
   context "meeting with talks" do 
     let(:talks) { FactoryGirl.create_list(:talks, 2, meeting_id: meeting.id) }
 
@@ -42,6 +47,11 @@ RSpec.describe "meetings/show", type: :view do
     it "shows an edit link" do 
       render
       expect(rendered).to have_link 'Edit' 
+    end
+
+    it "shows a destroy link" do 
+      render
+      expect(rendered).to have_link 'Destroy'
     end
   end
 end
