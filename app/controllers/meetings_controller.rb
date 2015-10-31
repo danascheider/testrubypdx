@@ -65,9 +65,11 @@ class MeetingsController < ApplicationController
   # DELETE /meetings/1
   # DELETE /meetings/1.json
   def destroy
+    upcoming_or_past = Meeting.upcoming.include?(@meeting) ? 'upcoming' : 'past'
+
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to "/meetings/#{upcoming_or_past}", notice: 'Meeting was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -281,21 +281,37 @@ RSpec.describe MeetingsController, type: :controller do
   describe "DELETE #destroy" do
     context 'authorized' do 
       before(:each) do 
-        allow_any_instance_of(User).to receive(:id).and_return(1)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user))
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(FactoryGirl.create(:user, id: 1))
       end
 
-      it "destroys the requested meeting" do
-        meeting = FactoryGirl.create(:meeting)
-        expect {
+      context "past meeting" do 
+        it "destroys the requested meeting" do
+          meeting = FactoryGirl.create(:meeting)
+          expect {
+            delete :destroy, {:id => meeting.to_param}, valid_session
+          }.to change(Meeting, :count).by(-1)
+        end
+
+        it "redirects to the past meetings list" do
+          meeting = FactoryGirl.create(:meeting)
           delete :destroy, {:id => meeting.to_param}, valid_session
-        }.to change(Meeting, :count).by(-1)
+          expect(response).to redirect_to(past_meetings_url)
+        end
       end
 
-      it "redirects to the meetings list" do
-        meeting = FactoryGirl.create(:meeting)
-        delete :destroy, {:id => meeting.to_param}, valid_session
-        expect(response).to redirect_to(meetings_url)
+      context "upcoming meeting" do 
+        it "destroys the requested meeting" do 
+          meeting = FactoryGirl.create(:meeting, date: Date.tomorrow)
+          expect{ 
+            delete :destroy, {:id => meeting.to_param}, valid_session
+            }.to change(Meeting, :count).by(-1)
+        end
+
+        it "redirects to the upcoming meetings list" do 
+          meeting = FactoryGirl.create(:meeting, date: Date.tomorrow)
+          delete :destroy, {:id => meeting.to_param}, valid_session
+          expect(response).to redirect_to(upcoming_meetings_url)
+        end
       end
     end
 
