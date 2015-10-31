@@ -33,3 +33,8 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+/.DS_Store
+/vendor/.DS_Store
+/features/.DS_Store
+/features/resources/.DS_Store
