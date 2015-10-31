@@ -146,43 +146,68 @@ RSpec.describe SpeakersController, type: :controller do
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        {company: 'Puppet Labs'}
-      }
-
-      it "updates the requested speaker" do
-        speaker = FactoryGirl.create(:speaker, valid_attributes)
-        put :update, {:id => speaker.to_param, :speaker => new_attributes}, valid_session
-        speaker.reload
-        expect(speaker.company).to eql 'Puppet Labs'
+  describe "PUT #update" do    
+    context "authorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       end
 
-      it "assigns the requested speaker as @speaker" do
-        speaker = FactoryGirl.create(:speaker, valid_attributes)
-        put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
-        expect(assigns(:speaker)).to eq(speaker)
+      context "with valid params" do
+        let(:new_attributes) {
+          {company: 'Puppet Labs'}
+        }
+
+        it "updates the requested speaker" do
+          speaker = FactoryGirl.create(:speaker, valid_attributes)
+          put :update, {:id => speaker.to_param, :speaker => new_attributes}, valid_session
+          speaker.reload
+          expect(speaker.company).to eql 'Puppet Labs'
+        end
+
+        it "assigns the requested speaker as @speaker" do
+          speaker = FactoryGirl.create(:speaker, valid_attributes)
+          put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
+          expect(assigns(:speaker)).to eq(speaker)
+        end
+
+        it "redirects to the speaker" do
+          speaker = FactoryGirl.create(:speaker, valid_attributes)
+          put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
+          expect(response).to redirect_to(speaker)
+        end
       end
 
-      it "redirects to the speaker" do
-        speaker = FactoryGirl.create(:speaker, valid_attributes)
-        put :update, {:id => speaker.to_param, :speaker => valid_attributes}, valid_session
-        expect(response).to redirect_to(speaker)
+      context "with invalid params" do
+        it "assigns the speaker as @speaker" do
+          speaker = FactoryGirl.create(:speaker, valid_attributes)
+          put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
+          expect(assigns(:speaker)).to eq(speaker)
+        end
+
+        it "re-renders the 'edit' template" do
+          speaker = FactoryGirl.create(:speaker, valid_attributes)
+          put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
+          expect(response).to render_template("edit")
+        end
       end
     end
 
-    context "with invalid params" do
-      it "assigns the speaker as @speaker" do
-        speaker = FactoryGirl.create(:speaker, valid_attributes)
-        put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
-        expect(assigns(:speaker)).to eq(speaker)
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return nil
       end
 
-      it "re-renders the 'edit' template" do
-        speaker = FactoryGirl.create(:speaker, valid_attributes)
-        put :update, {:id => speaker.to_param, :speaker => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+      it "doesn't update the user" do 
+        speaker = FactoryGirl.create(:speaker)
+        expect{
+          put :update, {:id => speaker.to_param, :speaker => {company: "New Relic"}}, valid_session
+        }.not_to change(speaker, :company)
+      end
+
+      it "redirects to login" do 
+        speaker = FactoryGirl.create(:speaker)
+        put :update, {:id => speaker.to_param, :speaker => {company: "New Relic"}}, valid_session
+        expect(response).to redirect_to '/login'
       end
     end
   end
