@@ -6,13 +6,16 @@ Feature: Edit talk
 
   Background:
     Given there is 1 talk
+    And there is a speaker named 'Gertrude Stein'
 
   Scenario: Logged-in user edits talk
     Given I am logged in
     When I visit the edit page for the talk
     And I fill in the 'description' field in the '#edit_talk' form with 'This talk will be awesome'
+    And I select 'Gertrude Stein' from the edit talk form's dropdown
     And I submit the '#edit_talk' form
     Then the talk's description should be 'This talk will be awesome'
+    And the talk's speaker should be named 'Gertrude Stein'
     And I should be on the talk's show page
 
   Scenario: Invalid values

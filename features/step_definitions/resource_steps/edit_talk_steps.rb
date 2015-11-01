@@ -12,6 +12,12 @@ When /^I fill in the '([^']*)' field in the '#edit_talk' form with '([^']*)'$/ d
   end
 end
 
+When /^I select '([^']*)' from the edit talk form's dropdown$/ do |name|
+  within "#edit_talk_#{@talk.id}" do 
+    select name, from: "talk_speaker_id"
+  end
+end
+
 When /^I submit the '#edit_talk' form$/ do 
   within "#edit_talk_#{@talk.id}" do 
     click_button "Update Talk"
