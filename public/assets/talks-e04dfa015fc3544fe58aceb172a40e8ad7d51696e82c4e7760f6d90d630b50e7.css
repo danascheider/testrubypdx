@@ -1,0 +1,5 @@
+/* line 1, /Users/dana/Development/testrubypdx/app/assets/stylesheets/talks.scss */
+#new_talk > #nested_speaker_form,
+.edit_talk > #nested_speaker_form {
+  display: none;
+}

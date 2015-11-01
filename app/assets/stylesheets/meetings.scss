@@ -3,7 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #new_meeting, #new_talk, #new_speaker {
-  tr {
-    height: 4em;
+  td, th {
+    padding: 0.5em;
+  }
+
+  #nested_speaker_form {
+    display: none;
+
+    td, th {
+      padding: 0.25em;
+    }
   }
 }
