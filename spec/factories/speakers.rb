@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :speaker do
     first_name "FirstName"
-    last_name "LastName"
+    sequence :last_name do |n|
+      "LastName#{n}"
+    end
   end
 end
