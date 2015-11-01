@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Speaker</th>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>
@@ -15,7 +16,13 @@
     <% @talks.each do |talk| %>
       <tr>
         <td><%= link_to talk.title, talk_url(talk) %></td>
-        <td><%= talk.speaker.name %></td>
+
+        <td>
+        <% if talk.speaker %>
+          <%= talk.speaker.name %>
+        <% end %>
+        </td>
+
         <td><%= talk.description %></td>
         <td><%= link_to 'Show', talk %></td>
         <% if current_user %>
