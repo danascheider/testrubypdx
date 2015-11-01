@@ -88,8 +88,13 @@ end
 
 ####### Speakers-Talks #######
 
-Given /^there are (\d+) additional talks$/ do |count|
-  FactoryGirl.create_list(:talk, count.to_i)
+Given /^the first speaker has (\d+) talks$/ do |count|
+  @speaker = Speaker.first
+  FactoryGirl.create_list(:talk, count.to_i, speaker_id: @speaker.id)
+end
+
+Given /^the last speaker has (\d+) talks$/ do |count|
+  FactoryGirl.create_list(:talk, count.to_i, speaker_id: Speaker.last.id)
 end
 
 When /^I visit the page for that speaker's talks$/ do 
