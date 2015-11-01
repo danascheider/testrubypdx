@@ -8,7 +8,7 @@ RSpec.describe "speakers/show", type: :view do
       :first_name => "Bob",
       :last_name => "Jones",
       :website => "http://www.bobjones.edu",
-      :company => "Bob Jones University"
+      :company => "Faith Hill Baptist University"
     ))
 
     @speaker.talks = FactoryGirl.create_list(:talk, 2)
@@ -19,16 +19,11 @@ RSpec.describe "speakers/show", type: :view do
       def view.current_user; nil; end
     end
 
-    it "has an ID that identifies the speaker" do 
-      render
-      expect(rendered).to have_selector "#speaker_#{@speaker.id}_profile"
-    end
-
     it "renders attributes" do
       render
       expect(rendered).to match(/Bob Jones/)
       expect(rendered).to match(/http\:\/\/www\.bobjones\.edu/)
-      expect(rendered).to match(/Bob Jones University/)
+      expect(rendered).to match(/Faith Hill Baptist University/)
     end
 
     it "displays the speaker's talks" do 
@@ -55,16 +50,11 @@ RSpec.describe "speakers/show", type: :view do
       def view.current_user; @user; end
     end
 
-    it "has an ID that identifies the speaker" do 
-      render
-      expect(rendered).to have_selector "#speaker_#{@speaker.id}_profile"
-    end
-
     it "renders attributes" do
       render
       expect(rendered).to match(/Bob Jones/)
       expect(rendered).to match(/http\:\/\/www\.bobjones\.edu/)
-      expect(rendered).to match(/Bob Jones University/)
+      expect(rendered).to match(/Faith Hill Baptist University/)
     end
 
     it "displays the speaker's talks" do 
