@@ -5,12 +5,18 @@ Feature: Create talk
   in our upcoming meetings
   I need to add a talk
 
+  Background:
+    Given there are no talks
+    And there is a speaker named 'Florence Nightingale'
+
   Scenario: Logged-in user creates talk
     Given I am logged in
     When I visit '/talks/new'
     And I fill in the new talk form's 'title' field with 'New Talk'
+    And I select 'Florence Nightingale' from the new talk form's dropdown
     And I submit the new talk form
     Then there should be 1 talk called 'New Talk'
+    And the talk's speaker should be named 'Florence Nightingale'
     And I should be on the talk's show page
 
   Scenario: Invalid talk

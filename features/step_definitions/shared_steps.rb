@@ -14,6 +14,11 @@ Given /^I'm not logged in$/ do
   step "I am not logged in"
 end
 
+Given /^there is a speaker named '([^']*)'$/ do |name|
+  names = name.split(' ')
+  FactoryGirl.create(:speaker, first_name: names[0], last_name: names[1])
+end
+
 When /^I visit '(\S*)'$/ do |path|
   visit path
 end
