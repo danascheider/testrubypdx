@@ -11,15 +11,17 @@
     </div>
   <% end %>
   
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+    <tr class="field">
+      <th><%= f.label :title %></th>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr class="field">
+      <th><%= f.label :description %></th>
+      <td><%= f.text_field :description %></td>
+    </tr>
+    <tr class="actions">
+      <td colspan="2"><%= f.submit %></td>
+    </tr>
+  </table>
 <% end %>
