@@ -40,7 +40,7 @@ RSpec.describe Meeting, type: :model do
 
   describe 'display_date' do 
     it 'gives the correct display date' do 
-      meeting = FactoryGirl.create(:meeting)
+      meeting = FactoryGirl.create(:meeting, date: '2015-10-22')
       expect(meeting.display_date).to eql "Thursday, October 22, 2015"
     end
   end
