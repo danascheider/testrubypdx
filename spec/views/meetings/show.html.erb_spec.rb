@@ -24,15 +24,6 @@ RSpec.describe "meetings/show", type: :view do
     expect(rendered).not_to have_link 'Destroy'
   end
 
-  context "meeting with talks" do 
-    let(:talks) { FactoryGirl.create_list(:talks, 2, meeting_id: meeting.id) }
-
-    it "displays the talks" do
-      render
-      expect(rendered).to have_css ".talk", count: 2
-    end
-  end
-
   context "logged-in user" do 
     before(:each) do 
       @user = user
