@@ -27,8 +27,12 @@ describe 'factories' do
     context 'basic' do 
       let(:meeting) { FactoryGirl.create(:meeting) }
 
-      it 'has a date' do 
+      it 'has a valid date' do 
         expect(meeting.date).not_to be_nil
+      end
+
+      it 'has a unique date' do 
+        expect(meeting.date).not_to eql FactoryGirl.create(:meeting).date
       end
     end
 
@@ -38,6 +42,10 @@ describe 'factories' do
       it 'is in the past' do 
         expect(meeting.date).to be_past
       end
+
+      it 'has a unique date' do 
+        expect(meeting.date).not_to eql FactoryGirl.create(:past_meeting).date
+      end
     end
 
     context 'upcoming meeting' do 
@@ -45,6 +53,10 @@ describe 'factories' do
 
       it 'is in the future' do 
         expect(meeting.date).to be_future
+      end
+
+      it 'has a unique date' do 
+        expect(meeting.date).not_to eql FactoryGirl.create(:upcoming_meeting).date
       end
     end
   end
