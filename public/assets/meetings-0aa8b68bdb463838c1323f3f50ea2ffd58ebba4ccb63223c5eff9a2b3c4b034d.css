@@ -1,0 +1,4 @@
+/* line 6, /Users/dana/Development/testrubypdx/app/assets/stylesheets/meetings.scss */
+#new_meeting tr, #new_talk tr, #new_speaker tr {
+  height: 4em;
+}
