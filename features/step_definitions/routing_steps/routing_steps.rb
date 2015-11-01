@@ -1,4 +1,50 @@
 
+####### Meetings #######
+
+Given /^the meetings have talks$/ do 
+  meetings = @meetings || Meeting.all
+  meetings.each do |meeting|
+    FactoryGirl.create(:talk, meeting_id: meeting.id)
+  end
+end
+
+When /^I visit the first meeting's page$/ do 
+  visit "/meetings/#{Meeting.first.id}"
+end
+
+Then /^I should see the first meeting's information$/ do 
+  expect(page).to have_content(Meeting.first.display_date)
+  expect(page).to have_content(Meeting.first.talks.first.title)
+end
+
+Then /^I should not see the last meeting's information$/ do 
+  expect(page).not_to have_content(Meeting.last.display_date)
+end
+
+Then /^I should see all the past meetings listed$/ do 
+  Meeting.past.each do |meeting|
+    expect(page).to have_content(meeting.display_date)
+  end
+end
+
+Then /^I should see all the upcoming meetings listed$/ do 
+  Meeting.upcoming.each do |meeting|
+    expect(page).to have_content(meeting.display_date)
+  end
+end
+
+Then /^I should not see the upcoming meetings$/ do 
+  Meeting.upcoming.each do |meeting|
+    expect(page).not_to have_content(meeting.display_date)
+  end
+end
+
+Then /^I should not see the past meetings$/ do 
+  Meeting.past.each do |meeting|
+    expect(page).not_to have_content(meeting.display_date)
+  end
+end
+
 ####### Speakers #######
 
 When /^I visit the first speaker's page$/ do 
@@ -37,5 +83,28 @@ end
 Then /^I should see all the talks listed$/ do 
   Talk.all.each do |talk|
     expect(page).to have_content(talk.title)
+  end
+end
+
+####### Speakers-Talks #######
+
+Given /^there are (\d+) additional talks$/ do |count|
+  FactoryGirl.create_list(:talk, count.to_i)
+end
+
+When /^I visit the page for that speaker's talks$/ do 
+  visit "/speakers/#{@speaker.id}/talks"
+end
+
+Then /^I should see all that speaker's talks$/ do 
+  @speaker.talks.each do |talk|
+    expect(page).to have_content talk.title
+  end
+end
+
+Then /^I should not see the other talks$/ do 
+  talks = Talk.where("speaker_id != ?", @speaker.id)
+  talks.each do |talk|
+    expect(page).not_to have_content talk.title
   end
 end

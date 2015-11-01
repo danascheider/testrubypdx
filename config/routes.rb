@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
 
+  concern :has_talks do 
+    resources :talks
+  end
+
   resources :talks
-  resources :speakers
+  resources :speakers, concerns: :has_talks
+
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
   
   resources :meetings, except: [:index] do
+    concerns :has_talks
     collection do 
       get 'past'
       get 'upcoming'

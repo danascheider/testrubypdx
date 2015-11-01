@@ -7,11 +7,9 @@ class TalksController < ApplicationController
   # GET /meetings/:id/talks
   # GET /talks.json
   def index
-    @talks = if params[:speaker_id] then Speaker.find(params[:speaker_id]).talks
-    if params[:speaker_id] 
-      @talks = Speaker.find(params[:speaker_id]).talks
-    else
-      @talks = Talk.all
+    @talks = if params[:speaker_id] then Speaker.find(params[:speaker_id]).talks;
+    elsif params[:meeting_id] then Meeting.find(params[:meeting_id]).talks;
+    else Talk.all;
     end
   end
 

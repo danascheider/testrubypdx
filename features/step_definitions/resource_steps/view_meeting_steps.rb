@@ -1,5 +1,10 @@
 Given /^there (?:is|are) (\d+) meetings?$/ do |count|
-  @meeting = FactoryGirl.create(:meeting, {description: 'The quick brown fox jumped over the lazy dog'});
+  if count == '1'
+    @meeting = FactoryGirl.create(:meeting, {description: 'The quick brown fox jumped over the lazy dog'})
+  else
+    @meetings = []
+    count.to_i.times { @meetings << FactoryGirl.create(:meeting) }
+  end
 end
 
 Given /^the meeting has (\d+) talks$/ do |count|
