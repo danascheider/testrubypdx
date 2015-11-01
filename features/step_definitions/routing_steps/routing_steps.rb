@@ -97,8 +97,28 @@ Given /^the last speaker has (\d+) talks$/ do |count|
   FactoryGirl.create_list(:talk, count.to_i, speaker_id: Speaker.last.id)
 end
 
+When /^I fill in the '\#new_talk' form with the following attributes:$/ do |table|
+  attributes = table.hashes.first
+
+  within '#new_talk' do 
+    attributes.each do |attribute, value|
+      fill_in "talk_#{attribute}", with: value
+    end
+
+    click_button 'Create Talk'
+  end
+end
+
+When /^I visit the page to create a talk for that speaker$/ do 
+  visit "/speakers/#{@speaker.id}/talks/new"
+end
+
 When /^I visit the page for that speaker's talks$/ do 
   visit "/speakers/#{@speaker.id}/talks"
+end
+
+Then /^I should be on the last talk's page$/ do 
+  expect(current_path).to eql talk_path(Talk.last)
 end
 
 Then /^I should see all that speaker's talks$/ do 
@@ -112,4 +132,8 @@ Then /^I should not see the other talks$/ do
   talks.each do |talk|
     expect(page).not_to have_content talk.title
   end
+end
+
+Then /^the speaker should have a talk called '([^']*)'$/ do |title|
+  expect(Talk.where(title: title, speaker_id: @speaker.id)).to be_truthy
 end
