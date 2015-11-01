@@ -20,8 +20,25 @@ When /^I submit the creation form with valid information$/ do
   end
 end
 
+When /^I submit the user creation form with no username$/ do 
+  within '#new_user' do 
+    fill_in 'user_password', with: 'foobarbaz'
+    fill_in 'user_password_confirmation', with: 'foobarbaz'
+    fill_in 'user_email', with: 'foobar@baz.com'
+    click_button 'Create User'
+  end
+end
+
+Then /^I should see a message that username cannot be blank$/ do 
+  expect(page).to have_content "Name can't be blank"
+end
+
 Then /^there should be (\d+) users?$/ do |num|
   expect(User.count).to eql num.to_i
+end
+
+Then /^there should be no users$/ do 
+  expect(User.count).to eql 0
 end
 
 Then /^I should not see the user creation form$/ do 

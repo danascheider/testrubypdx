@@ -12,6 +12,13 @@ Feature: Create user
     And I submit the creation form with valid information
     Then there should be 2 users
 
+  Scenario: Invalid user creation
+    Given there are no users
+    When I visit the "Create a User" page
+    And I submit the user creation form with no username
+    Then there should be no users
+    And I should see a message that username cannot be blank
+
   Scenario: Unauthorized user creation
     Given there are 3 users
     And I am not logged in
