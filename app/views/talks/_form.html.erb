@@ -17,6 +17,12 @@
       <td><%= f.text_field :title, class: 'form-control' %></td>
     </tr>
     <tr class="field">
+      <th><%= f.label :speaker %></th>
+      <td>
+        <%= f.select :speaker_id, Speaker.all.map {|speaker| [speaker.name, speaker.id] }, {include_blank: true}, {class: 'form-control'} %>
+      </td>
+    </tr>
+    <tr class="field">
       <th><%= f.label :description %></th>
       <td><%= f.text_area :description, class: 'form-control' %></td>
     </tr>
