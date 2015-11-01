@@ -11,8 +11,8 @@ FactoryGirl.define do
     end
 
     factory :upcoming_meeting do 
-      sequence :date do 
-        "2020-#{rand(13)}-#{rand(32)} #{rand(24)}:#{rand(61)}:00"
+      sequence :date do |n|
+        Date.today + n.years
       end
     end
   end
