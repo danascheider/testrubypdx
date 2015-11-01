@@ -21,6 +21,7 @@ Dir.glob("./features/support/**/*.rb") { |file| require file }
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
+
 Capybara.javascript_driver = :webkit
 Capybara::Webkit.configure do |config|
   config.allow_url("fonts.googleapis.com")
