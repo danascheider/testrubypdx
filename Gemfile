@@ -57,6 +57,8 @@ group :development, :test do
   # Check test coverage using SimpleCov and Coveralls
   gem 'simplecov', '~> 0.10'
   gem 'coveralls', '~> 0.8'
+
+  gem 'capybara-webkit', '~> 1.7.1'
 end
 
 group :development do
