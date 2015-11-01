@@ -30,5 +30,6 @@ Then /^I should see the meeting creation form$/ do
 end
 
 Then /^I should have the option to create a talk$/ do 
+  pending
   expect(page).to have_link 'Add a talk'
 end

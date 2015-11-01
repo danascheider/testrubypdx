@@ -3,9 +3,16 @@ class TalksController < ApplicationController
   before_filter :authorize, only: [:new, :create, :edit, :update]
 
   # GET /talks
+  # GET /speakers/:id/talks
+  # GET /meetings/:id/talks
   # GET /talks.json
   def index
-    @talks = Talk.all
+    @talks = if params[:speaker_id] then Speaker.find(params[:speaker_id]).talks
+    if params[:speaker_id] 
+      @talks = Speaker.find(params[:speaker_id]).talks
+    else
+      @talks = Talk.all
+    end
   end
 
   # GET /talks/1
