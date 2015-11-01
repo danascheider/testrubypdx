@@ -15,7 +15,7 @@ RSpec.describe "talks/edit", type: :view do
 
       assert_select "input#talk_title[name=?]", "talk[title]"
 
-      assert_select "input#talk_description[name=?]", "talk[description]"
+      assert_select "textarea#talk_description[name=?]", "talk[description]"
     end
   end
 end
