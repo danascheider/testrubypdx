@@ -21,6 +21,8 @@ class TalksController < ApplicationController
   # GET /talks/new
   def new
     @talk = Talk.new
+    @meeting = Meeting.find(params[:meeting_id]) if params[:meeting_id]
+    @speaker = Speaker.find(params[:speaker_id]) if params[:speaker_id]
   end
 
   # GET /talks/1/edit
@@ -31,6 +33,8 @@ class TalksController < ApplicationController
   # POST /talks.json
   def create
     @talk = Talk.new(talk_params)
+    @talk.meeting_id ||= params[:meeting_id]
+    @talk.speaker_id ||= params[:speaker_id]
 
     respond_to do |format|
       if @talk.save

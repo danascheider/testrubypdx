@@ -137,7 +137,7 @@ Then /^I should not see the other talks$/ do
 end
 
 Then /^the speaker should have a talk called '([^']*)'$/ do |title|
-  expect(Talk.where(title: title, speaker_id: @speaker.id)).to be_truthy
+  expect(Talk.where(title: title, speaker_id: @speaker.id)).to exist
 end
 
 ####### Meetings-Talks #######
@@ -171,4 +171,8 @@ Then(/^I should not see the talks for the other meeting$/) do
   unwanted_talks.each do |talk|
     expect(page).not_to have_content talk.title
   end
+end
+
+Then(/^the meeting should have a talk called '([^']*)'$/) do |title|
+  expect(Talk.where(:meeting_id => @meeting.id, :title => title)).to exist
 end

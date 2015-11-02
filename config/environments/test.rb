@@ -39,4 +39,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Raise log level to debug
+  config.log_level = :info
+  config.colorize_logging = false
 end
