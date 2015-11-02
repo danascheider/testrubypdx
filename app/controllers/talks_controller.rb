@@ -7,8 +7,8 @@ class TalksController < ApplicationController
   # GET /meetings/:id/talks
   # GET /talks.json
   def index
-    @talks = if params[:speaker_id] then Speaker.find(params[:speaker_id]).talks;
-    elsif params[:meeting_id] then Meeting.find(params[:meeting_id]).talks;
+    @talks = if params[:speaker_id] then Speaker.find(params[:speaker_id].to_i).talks;
+    elsif params[:meeting_id] then Meeting.find(params[:meeting_id].to_i).talks;
     else Talk.all;
     end
   end
@@ -75,6 +75,6 @@ class TalksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
-      params.require(:talk).permit(:date, :title, :description, :speaker_id)
+      params.require(:talk).permit(:date, :title, :description, :speaker_id, :meeting_id)
     end
 end
