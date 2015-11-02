@@ -17,6 +17,8 @@ RSpec.describe "talks/new", type: :view do
 
       assert_select "select#talk_speaker_id[name=?]", "talk[speaker_id]"
 
+      assert_select "select#talk_meeting_id[name=?]", "talk[meeting_id]"
+
       assert_select "textarea#talk_description[name=?]", "talk[description]"
     end
   end
