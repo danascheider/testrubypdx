@@ -97,7 +97,7 @@ Given /^the last speaker has (\d+) talks$/ do |count|
   FactoryGirl.create_list(:talk, count.to_i, speaker_id: Speaker.last.id)
 end
 
-When /^I fill in the '\#new_talk' form with the following attributes:$/ do |table|
+When /^I submit the '\#new_talk' form with the following attributes:$/ do |table|
   attributes = table.hashes.first
 
   within '#new_talk' do 
@@ -109,11 +109,13 @@ When /^I fill in the '\#new_talk' form with the following attributes:$/ do |tabl
   end
 end
 
-When /^I visit the page to create a talk for that speaker$/ do 
+When /^I visit the page to create a talk for the first speaker$/ do 
+  @speaker = Speaker.first
   visit "/speakers/#{@speaker.id}/talks/new"
 end
 
-When /^I visit the page for that speaker's talks$/ do 
+When /^I visit the page for the first speaker's talks$/ do 
+  @speaker = Speaker.first
   visit "/speakers/#{@speaker.id}/talks"
 end
 
