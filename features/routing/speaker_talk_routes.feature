@@ -7,13 +7,13 @@ Feature: Speaker talk routes
     And I am logged in
 
   Scenario: Visit route for a given speaker's talks
-    When I visit the page for that speaker's talks
+    When I visit the page for the first speaker's talks
     Then I should see all that speaker's talks
     And I should not see the other talks
 
   Scenario: Create a talk for a particular speaker
-    When I visit the page to create a talk for that speaker
-    And I fill in the '#new_talk' form with the following attributes:
+    When I visit the page to create a talk for the first speaker
+    And I submit the '#new_talk' form with the following attributes:
       | title            |
       | How to Use RSpec |
     Then the speaker should have a talk called 'How to Use RSpec'
