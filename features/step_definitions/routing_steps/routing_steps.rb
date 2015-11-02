@@ -97,7 +97,7 @@ Given /^the last speaker has (\d+) talks$/ do |count|
   FactoryGirl.create_list(:talk, count.to_i, speaker_id: Speaker.last.id)
 end
 
-When /^I submit the '\#new_talk' form with the following attributes:$/ do |table|
+When /^I fill in the '\#new_talk' form with the following attributes:$/ do |table|
   attributes = table.hashes.first
 
   within '#new_talk' do 
@@ -109,12 +109,11 @@ When /^I submit the '\#new_talk' form with the following attributes:$/ do |table
   end
 end
 
-When /^I visit the page to create a talk for the first speaker$/ do 
+When /^I visit the page to create a talk for that speaker$/ do 
   visit "/speakers/#{@speaker.id}/talks/new"
 end
 
-When /^I visit the page for the first speaker's talks$/ do 
-  @speaker = Speaker.first
+When /^I visit the page for that speaker's talks$/ do 
   visit "/speakers/#{@speaker.id}/talks"
 end
 
@@ -136,42 +135,5 @@ Then /^I should not see the other talks$/ do
 end
 
 Then /^the speaker should have a talk called '([^']*)'$/ do |title|
-  expect(Talk.where(title: title, speaker_id: @speaker.id).count).to eql 1
-end
-
-####### Meetings-Talks #######
-
-Given /^the first meeting has (\d+) talks$/ do |count|
-  @meeting = Meeting.first
-  FactoryGirl.create_list(:talk, count.to_i, meeting_id: @meeting.id)
-end
-
-Given /^the last meeting has (\d+) talks$/ do |count|
-  FactoryGirl.create_list(:talk, count.to_i, meeting_id: Meeting.last.id)
-end
-
-When /^I visit the page with the talks for the meeting$/ do 
-  visit "/meetings/#{@meeting.id}/talks"
-end
-
-When /^I visit the page to create a talk for the first meeting$/ do 
-  @meeting = Meeting.first
-  visit "/meetings/#{@meeting.id}/talks/new"
-end
-
-Then /^I should see the talks for that meeting$/ do 
-  @meeting.talks.each do |talk|
-    expect(page).to have_content(talk.title)
-  end
-end
-
-Then /^I should not see the talks for the other meeting$/ do 
-  talks = Talk.where("meeting_id != ?", @meeting.id)
-  talks.each do |talk|
-    expect(page).not_to have_content(talk.title)
-  end
-end
-
-Then /^the meeting should have a talk called '([^']*)'$/ do |title|
-  expect(Talk.where(title: title, meeting_id: @meeting.id).count).to eql 1
+  expect(Talk.where(title: title, speaker_id: @speaker.id)).to be_truthy
 end
