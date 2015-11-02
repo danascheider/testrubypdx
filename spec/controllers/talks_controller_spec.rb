@@ -19,6 +19,20 @@ RSpec.describe TalksController, type: :controller do
       get :index, {}, valid_session
       expect(assigns(:talks)).to eq([talk])
     end
+
+    it "assigns only one speaker's talks as @talks" do 
+      speaker = FactoryGirl.create(:speaker)
+      talk1, talk2 = FactoryGirl.create(:talk, :speaker_id => speaker.id), FactoryGirl.create(:talk)
+      get :index, {:speaker_id => speaker.id}, valid_session
+      expect(assigns(:talks)).to eq [talk1]
+    end
+
+    it "assigns only one meeting's talks as @talks" do 
+      meeting = FactoryGirl.create(:meeting)
+      talk1, talk2 = FactoryGirl.create(:talk, :meeting_id => meeting.id), FactoryGirl.create(:talk)
+      get :index, {:meeting_id => meeting.id}, valid_session
+      expect(assigns(:talks)).to eq [talk1]
+    end
   end
 
   describe "GET #show" do
@@ -109,6 +123,20 @@ RSpec.describe TalksController, type: :controller do
         it "redirects to the created talk" do
           post :create, {:talk => valid_attributes}, valid_session
           expect(response).to redirect_to(Talk.last)
+        end
+
+        it "adds the speaker_id if appropriate" do 
+          speaker = FactoryGirl.create(:speaker)
+          valid_attributes[:speaker_id] = speaker.id
+          post :create, {:talk => valid_attributes}, valid_session
+          expect(assigns(:talk).speaker_id).to eql speaker.id
+        end
+
+        it "adds the meeting_id if appropriate" do 
+          meeting = FactoryGirl.create(:meeting)
+          valid_attributes[:meeting_id] = meeting.id
+          post :create, {:talk => valid_attributes}, valid_session
+          expect(assigns(:talk).meeting_id).to eql meeting.id
         end
       end
 
