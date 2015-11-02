@@ -1,4 +1,6 @@
 class SiteController < ApplicationController
+  before_filter :authorize, only: [:admin]
+
   def index
   end
 
@@ -6,6 +8,10 @@ class SiteController < ApplicationController
   end
 
   def about
+  end
+
+  def admin
+    @admin = current_user
   end
 
   # Triggered when a user submits the contact form

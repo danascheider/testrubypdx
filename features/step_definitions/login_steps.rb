@@ -30,5 +30,5 @@ end
 
 Then /^I should be logged in$/ do 
   step 'I should see the text "Logout"'
-  step 'I should see the text "Add Meeting"'
+  step 'I should see the text "Admin"'
 end

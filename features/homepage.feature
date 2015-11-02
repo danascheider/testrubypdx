@@ -12,6 +12,12 @@ Feature: User visits homepage
   Scenario: User not logged in
     Given I am not logged in
     When I visit the web site
-    Then I should not see the text "LOGOUT"
-    And I should not see the text "ADD MEETING"
-    And I should not see the text "LOGIN"
+    Then I should not see the text "Logout"
+    And I should not see the text "Admin"
+    And I should not see the text "Login"
+
+  Scenario: User logged in
+    Given I am logged in
+    When I visit the web site
+    Then I should see the text "Logout"
+    And I should see the text "Admin"

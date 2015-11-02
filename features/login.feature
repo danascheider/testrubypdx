@@ -8,4 +8,4 @@ Feature: Login
     And I submit the login form
     Then I should be on the homepage
     And I should see the "Logout" link
-    And I should see the "Add Meeting" link
+    And I should see the "Admin" link

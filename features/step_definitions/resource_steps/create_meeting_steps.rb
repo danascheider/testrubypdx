@@ -26,7 +26,9 @@ Then /^I should be on the new meeting's view page$/ do
 end
 
 Then /^I should see the meeting creation form$/ do 
-  expect(page).to have_css '#new_meeting'
+  within '#admin_panel' do 
+    expect(page).to have_css '#new_meeting'
+  end
 end
 
 Then /^I should have the option to create a talk$/ do 

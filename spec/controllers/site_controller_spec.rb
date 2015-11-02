@@ -31,8 +31,8 @@ RSpec.describe SiteController, type: :controller do
   end
 
   describe "GET #admin" do 
-    context(:authorized) do 
-      let(:admin) { FactoryGirl.create(:user, id: 1) }
+    context "authorized" do 
+      let(:user) { FactoryGirl.create(:user, id: 1) }
 
       before(:each) do 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -41,6 +41,17 @@ RSpec.describe SiteController, type: :controller do
       it "renders the admin template" do 
         get :admin, {}, valid_session
         expect(response).to render_template('admin')
+      end
+    end
+
+    context "unauthorized" do 
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+      end
+
+      it "redirects to login" do 
+        get :admin, {}, valid_session
+        expect(response).to redirect_to '/login'
       end
     end
   end
