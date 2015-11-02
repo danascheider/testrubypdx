@@ -139,3 +139,36 @@ end
 Then /^the speaker should have a talk called '([^']*)'$/ do |title|
   expect(Talk.where(title: title, speaker_id: @speaker.id)).to be_truthy
 end
+
+####### Meetings-Talks #######
+
+Given(/^the first meeting has (\d+) talks$/) do |count|
+  Meeting.first.talks = FactoryGirl.create_list(:talk, 2, :meeting_id => Meeting.first.id)
+end
+
+Given(/^the last meeting has (\d+) talks$/) do |count|
+  Meeting.last.talks = FactoryGirl.create_list(:talk, 2, :meeting_id => Meeting.last.id)
+end
+
+When(/^I visit the page with the talks for the first meeting$/) do
+  @meeting = Meeting.first
+  visit "/meetings/#{@meeting.id}/talks"
+end
+
+When(/^I visit the page to create a talk for the first meeting$/) do
+  @meeting = Meeting.first
+  visit "/meetings/#{@meeting.id}/talks/new"
+end
+
+Then(/^I should see the talks for that meeting$/) do
+  @meeting.talks.each do |talk|
+    expect(page).to have_content talk.title
+  end
+end
+
+Then(/^I should not see the talks for the other meeting$/) do
+  unwanted_talks = Talk.where("meeting_id != ?", @meeting.id)
+  unwanted_talks.each do |talk|
+    expect(page).not_to have_content talk.title
+  end
+end

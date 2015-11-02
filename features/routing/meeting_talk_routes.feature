@@ -7,7 +7,7 @@ Feature: Meeting talk routes
     And I am logged in
 
   Scenario: Visit route for the talks being given at a particular meeting
-    When I visit the page with the talks for the meeting
+    When I visit the page with the talks for the first meeting
     Then I should see the talks for that meeting
     And I should not see the talks for the other meeting
 
