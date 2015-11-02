@@ -22,4 +22,26 @@ RSpec.describe SiteController, type: :controller do
       expect(assigns(:admin)).to eql User.first
     end
   end
+
+  describe "GET #about" do 
+    it "renders the about template" do 
+      get :about, {}, valid_session
+      expect(response).to render_template('about')
+    end
+  end
+
+  describe "GET #admin" do 
+    context(:authorized) do 
+      let(:admin) { FactoryGirl.create(:user, id: 1) }
+
+      before(:each) do 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      end
+
+      it "renders the admin template" do 
+        get :admin, {}, valid_session
+        expect(response).to render_template('admin')
+      end
+    end
+  end
 end
