@@ -35,3 +35,7 @@ Then /^I should have the option to create a talk$/ do
   pending
   expect(page).to have_link 'Add a talk'
 end
+
+Then /^I should see a message that the meeting has been created$/ do
+  expect(page).to have_content 'Meeting was successfully created'
+end

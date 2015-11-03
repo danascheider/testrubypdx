@@ -140,7 +140,7 @@ RSpec.describe MeetingsController, type: :controller do
 
         it "redirects to the created meeting" do
           post :create, {:meeting => valid_attributes}, valid_session
-          expect(response).to redirect_to(Meeting.last)
+          expect(response).to redirect_to('/admin')
         end
       end
 

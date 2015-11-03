@@ -17,4 +17,5 @@ Feature: Create Meeting
   Scenario: Logged-in user creates a meeting
     When I submit the form to create a meeting
     Then there should be 1 meeting
-    And I should be on the new meeting's view page
+    Then I should be on the '/admin' page
+    And I should see a message that the meeting has been created
