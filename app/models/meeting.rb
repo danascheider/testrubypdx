@@ -17,8 +17,7 @@ class Meeting < ActiveRecord::Base
     "#{weekday}, #{month} #{day}, #{year}"
   end
 
-  def time
-    datetime = date.to_datetime
-    datetime.strftime('%l:%M %P').lstrip
+  def display_time
+    time.strftime("%l:%M %P").lstrip if time
   end
 end

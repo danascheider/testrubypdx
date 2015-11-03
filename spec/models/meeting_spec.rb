@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Meeting, type: :model do
   it { is_expected.to respond_to(:date) }
+  it { is_expected.to respond_to(:time) }
   it { is_expected.to respond_to(:description) }
 
   describe 'scopes' do 
@@ -45,10 +46,10 @@ RSpec.describe Meeting, type: :model do
     end
   end
 
-  describe 'time' do 
+  describe 'display_time' do 
     it 'returns the meeting time as a string' do
-      meeting = FactoryGirl.create(:meeting, date: '2015-10-22 18:12:00')
-      expect(meeting.time).to eql '6:12 pm'
+      meeting = FactoryGirl.create(:meeting, time: '18:12')
+      expect(meeting.display_time).to eql '6:12 pm'
     end
   end
 end

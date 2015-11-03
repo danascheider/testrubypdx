@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :meeting do
+    time '18:12'
     sequence :date do |n|
       Date.tomorrow - n.weeks
     end

@@ -9,6 +9,9 @@ RSpec.describe "meetings/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", meetings_path, "post" do
+      assert_select 'input#meeting_date'
+      assert_select 'input#meeting_time'
+      assert_select 'textarea#meeting_description'
     end
   end
 end
