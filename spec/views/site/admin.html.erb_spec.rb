@@ -7,8 +7,8 @@ RSpec.describe "site/admin", type: :view do
 
   it "displays the admin actions" do 
     render
-    expect(rendered).to have_link 'Manage Meetings'
-    expect(rendered).to have_link 'Manage Talks'
-    expect(rendered).to have_link 'Manage Speakers'
+    expect(rendered).to have_link 'Add Meetings'
+    expect(rendered).to have_link 'Add Talks'
+    expect(rendered).to have_link 'Add Speakers'
   end
 end

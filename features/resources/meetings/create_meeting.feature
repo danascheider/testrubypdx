@@ -8,7 +8,7 @@ Feature: Create Meeting
     Given I am logged in
     And there are no meetings
     And I visit '/admin'
-    When I click the "Manage Meetings" link
+    When I click the "Add Meetings" link
 
   Scenario: View form
     Then I should see the meeting creation form
