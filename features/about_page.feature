@@ -6,4 +6,7 @@ Feature: About page
 
   Scenario: Visit about page
     When I visit the "About Us" page
-    Then I should see the text "ABOUT TEST RUBY PDX"
+    Then I should see the text "About Test Ruby PDX"
+    And I should see the text "About Our Sponsor"
+    And I should see the text "About Our Organizer"
+    And I should see the text "Code of Conduct"
