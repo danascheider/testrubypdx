@@ -14,7 +14,7 @@
 </head>
 <body>
   <!-- Static navbar -->
-  <div id='top-nav' class="navbar navbar-inverse navbar-static-top">
+  <header id='top-nav' class="navbar navbar-inverse navbar-static-top">
     <div class="container">
       <% flash.each do |key, value| %>
         <a href='#' data-dismiss='alert'><%= value %></a>
@@ -40,12 +40,12 @@
         </ul>
       </div><!--/.nav-collapse -->
     </div>
-  </div>
+  </header>
     
   <div class='container'>
     <%= yield %>
   </div>
-  <div id="footer">
+  <footer id="footer">
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
@@ -74,6 +74,6 @@
       </div>
     
     </div>
-  </div>
+  </footer>
 </body>
 </html>
