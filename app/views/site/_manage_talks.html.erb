@@ -1,0 +1,40 @@
+<h3>Create Talk</h3>
+
+<% @talk ||= Talk.new %>
+<%= form_for(@talk) do |f| %>
+  <% if @talk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@talk.errors.count, "error") %> prohibited this talk from being saved:</h2>
+
+      <ul>
+      <% @talk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <table>
+    <tr class="field">
+      <th><%= f.label :title %></th>
+      <td><%= f.text_field :title, class: 'form-control' %></td>
+    </tr>
+    <tr class="field">
+    <th><%= f.label :speaker %></th>
+    <td>
+      <%= f.select :speaker_id, Speaker.all.map {|speaker| [speaker.name, speaker.id] }, {include_blank: true}, {class: 'form-control'} %>
+    </td>
+    </tr>
+    <tr class="field">
+      <th><%= f.label :description %></th>
+      <td><%= f.text_area :description, class: 'form-control' %></td>
+    </tr>
+    <tr class="field">
+      <th><%= f.label :meeting %></th>
+      <td><%= f.select :meeting_id, Meeting.upcoming.map {|meeting| [meeting.date, meeting.id] }, {include_blank: true}, {class: 'form-control'} %></td>
+    </tr>
+    <tr class="actions">
+      <td colspan="2"><%= f.submit class: 'btn btn-success' %></td>
+    </tr>
+  </table>
+<% end %>

@@ -9,3 +9,7 @@
 #admin_panel {
   padding: 4em;
 }
+
+.admin_view:not(.active) {
+  display: none;
+}
