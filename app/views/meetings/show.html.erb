@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class='show-meeting'>
-  <h2><%= @meeting.display_date %></h2>
-  <p class='meeting-time'><%= @meeting.display_time %></p>
+  <% date_and_time = "#{@meeting.display_time} #{@meeting.display_date}" %>
+  <h3><%= date_and_time %></h3>
   <p><%= @meeting.description %></p>
   <% @meeting.talks.each do |talk| %>
     <div class='talk'>

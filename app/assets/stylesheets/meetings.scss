@@ -6,12 +6,11 @@
   td, th {
     padding: 0.5em;
   }
+}
 
-  #nested_speaker_form {
-    display: none;
-
-    td, th {
-      padding: 0.25em;
-    }
-  }
+p.meeting-time {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
 }
