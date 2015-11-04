@@ -1,7 +1,7 @@
 <% @meetings.each do |meeting| %>
   <div class='meeting'>
     <h3><%= link_to meeting.display_date, meeting_url(meeting) %></h3>
-    <h5><%= meeting.display_time %></h4>
+    <p class='meeting-time'><%= meeting.display_time %></p>
     <p><%= meeting.description %></p>
     <% meeting.talks.each do |talk| %>
       <h4><%= link_to talk.title, talk_url(talk) %></h4>

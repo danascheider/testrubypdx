@@ -82,7 +82,7 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:date, :description)
+      params.require(:meeting).permit(:date, :time, :description)
     end
 
     def stringify_errors
