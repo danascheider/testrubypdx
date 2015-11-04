@@ -10,23 +10,22 @@ Feature: Add a speaker
 
   Scenario: Admin creates a speaker
     Given I am logged in
-    When I visit '/speakers/new'
+    When I visit '/admin'
+    And I click the "Add Speakers" link
     And I submit the '#new_speaker' form with the following data:
       | first_name | last_name | website              |
       | Dana       | Scheider  | https://tessitura.io |
     Then there should be a new speaker named "Dana Scheider"
+    And I should be on the '/admin' page
+    And I should see a message that the speaker was created successfully
 
   Scenario: Admin creates a speaker with invalid attributes
     Given I am logged in
-    When I visit '/speakers/new'
+    When I visit '/admin'
+    And I click the "Add Speakers" link
     And I submit the '#new_speaker' form with the following data:
       | last_name |
       | Barclay   |
     Then there should be no speakers
-    And I should see a message that the first name can't be blank 
-
-  Scenario: Visitor tries to create a speaker
-    Given I am not logged in
-    When I visit '/speakers/new'
-    Then I should not see the '#new_speaker' form
-    And I should be on the '/login' page
+    And I should be on the '/admin' page
+    And I should see a message that the speaker was invalid

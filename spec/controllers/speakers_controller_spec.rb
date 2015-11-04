@@ -109,9 +109,9 @@ RSpec.describe SpeakersController, type: :controller do
           expect(assigns(:speaker)).to be_persisted
         end
 
-        it "redirects to the created speaker" do
+        it "redirects to the admin page" do
           post :create, {:speaker => valid_attributes}, valid_session
-          expect(response).to redirect_to(Speaker.last)
+          expect(response).to redirect_to('/admin')
         end
       end
 
@@ -121,9 +121,9 @@ RSpec.describe SpeakersController, type: :controller do
           expect(assigns(:speaker)).to be_a_new(Speaker)
         end
 
-        it "re-renders the 'new' template" do
+        it "redirects to the admin page" do
           post :create, {:speaker => invalid_attributes}, valid_session
-          expect(response).to render_template("new")
+          expect(response).to redirect_to(admin_path)
         end
       end
     end
