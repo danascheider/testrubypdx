@@ -138,7 +138,7 @@ RSpec.describe MeetingsController, type: :controller do
           expect(assigns(:meeting)).to be_persisted
         end
 
-        it "redirects to the created meeting" do
+        it "redirects to the admin page" do
           post :create, {:meeting => valid_attributes}, valid_session
           expect(response).to redirect_to('/admin')
         end
@@ -150,9 +150,9 @@ RSpec.describe MeetingsController, type: :controller do
           expect(assigns(:meeting)).to be_a_new(Meeting)
         end
 
-        it "re-renders the 'new' template" do
+        it "redirects to the admin page" do
           post :create, {:meeting => invalid_attributes}, valid_session
-          expect(response).to render_template("new")
+          expect(response).to redirect_to("/admin")
         end
       end
     end

@@ -13,6 +13,18 @@ When /^I submit the form to create a meeting$/ do
   end
 end
 
+When /^I submit the '\#new_meeting' form with the following attributes:$/  do |table|
+  data = table.hashes.first
+
+  within '#new_meeting' do 
+    data.each do |key, value|
+      fill_in "meeting[#{key}]", with: value
+    end
+
+    click_button 'Create Meeting'
+  end
+end
+
 When /^I click the "([^"]*)" link$/ do |text|
   click_link text
 end
@@ -38,4 +50,8 @@ end
 
 Then /^I should see a message that the meeting has been created$/ do
   expect(page).to have_content 'Meeting was successfully created'
+end
+
+Then /^I should see a message that the meeting was invalid$/ do 
+  expect(page).to have_content 'Meeting invalid.'
 end

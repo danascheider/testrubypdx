@@ -26,6 +26,10 @@ Then /^there should be no speakers$/ do
   expect(Speaker.count).to eql 0
 end
 
-Then /^I should see a message that the first name can't be blank$/ do 
-  expect(page).to have_content 'First name can\'t be blank'
+Then /^I should see a message that the speaker was invalid$/ do 
+  expect(page).to have_content 'Speaker invalid'
+end
+
+Then /^I should see a message that the speaker was created successfully$/ do 
+  expect(page).to have_content 'Speaker was successfully created'
 end
