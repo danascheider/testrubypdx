@@ -19,3 +19,11 @@ Feature: Create Meeting
     Then there should be 1 meeting
     Then I should be on the '/admin' page
     And I should see a message that the meeting has been created
+
+  Scenario: Logged-in user tries to create an invalid meeting
+    When I submit the '#new_meeting' form with the following attributes:
+      | date |
+      |      |
+    Then there should be no meetings
+    And I should be on the '/admin' page
+    And I should see a message that the meeting was invalid

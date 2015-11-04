@@ -42,7 +42,7 @@ class MeetingsController < ApplicationController
         format.html { redirect_to '/admin', notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
       else
-        format.html { render :new }
+        format.html { redirect_to '/admin', notice: 'Meeting invalid. Please try again.' }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end
@@ -83,5 +83,9 @@ class MeetingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
       params.require(:meeting).permit(:date, :description)
+    end
+
+    def stringify_errors
+      str = ""
     end
 end
