@@ -11,29 +11,27 @@
     </div>
   <% end %>
 
-  <table>
-    <tr class="field">
-      <th><%= f.label :first_name %></th>
-      <td><%= f.text_field :first_name, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :last_name %></th>
-      <td><%= f.text_field :last_name, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :website %></th>
-      <td><%= f.text_field :website, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :company %></th>
-      <td><%= f.text_field :company, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :bio %></th>
-      <td><%= f.text_area :bio, class: 'form-control' %></td>
-    </tr>
+    <div class="field form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :website %>
+      <%= f.text_field :website, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :company %>
+      <%= f.text_field :company, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :bio %>
+      <%= f.text_area :bio, class: 'form-control' %>
+    </div><br><br>
     <tr class="actions">
-      <td colspan="2"><%= f.submit class: 'btn btn-success' %></td>
-    </tr>
-  </table>
+      <td colspan="2"><%= f.submit class: 'btn btn-success' %>
+    </div>
 <% end %>

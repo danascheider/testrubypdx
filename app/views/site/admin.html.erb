@@ -1,6 +1,6 @@
 <div class='row'>
-  <h2>Welcome <%= "#{@admin.first_name} #{@admin.last_name }"%>!</h2><br /><br />
   <div class='container' id="admin_panel">
+    <h2>Welcome <%= "#{@admin.first_name} #{@admin.last_name }"%>!</h2><br /><br />
     <nav id='admin_navbar'>
       <ul class='nav nav-pills'>
         <li role='presentation' class='active' data-target='#create_meeting'><%= link_to "Add Meetings", '#', onclick: 'return false;' %></li>

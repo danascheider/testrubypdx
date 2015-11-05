@@ -2,12 +2,6 @@ class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
   before_filter :authorize, except: [:show, :past, :upcoming]
 
-  # GET /meetings
-  # GET /meetings.json
-  def index
-    @meetings = Meeting.all
-  end
-
   # GET /meetings/1
   # GET /meetings/1.json
   def show
@@ -15,7 +9,10 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
+    @admin = User.first
     @meeting = Meeting.new
+    redirect_to login_path unless @admin
+    render :layout => 'admin'
   end
 
   # GET /meetings/1/edit

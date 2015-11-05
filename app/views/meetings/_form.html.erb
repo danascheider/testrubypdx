@@ -11,21 +11,19 @@
     </div>
   <% end %>
 
-  <table>
-    <tr class="field">
-      <th><%= f.label :date %></th>
-      <td><%= f.date_field :date, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :time %></th>
-      <td><%= f.time_field :time, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :description %></th>
-      <td><%= f.text_area :description, height: '6', class: 'form-control' %></td>
-    </tr>
+    <div class="field form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :time %>
+      <%= f.time_field :time, class: 'form-control' %>
+    </div><br>
+    <div class="field form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, height: '6', class: 'form-control' %>
+    </div><br><br>
     <tr class="actions">
-      <td colspan='2'><%= f.submit class: 'btn btn-success' %></td>
-    </tr>
-  </table>
+      <td colspan='2'><%= f.submit class: 'btn btn-success' %>
+    </div>
 <% end %>

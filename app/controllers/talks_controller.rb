@@ -20,9 +20,12 @@ class TalksController < ApplicationController
 
   # GET /talks/new
   def new
+    @admin = User.first
     @talk = Talk.new
     @meeting = Meeting.find(params[:meeting_id]) if params[:meeting_id]
     @speaker = Speaker.find(params[:speaker_id]) if params[:speaker_id]
+
+    render :layout => 'admin'
   end
 
   # GET /talks/1/edit

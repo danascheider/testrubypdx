@@ -12,27 +12,23 @@
     </div>
   <% end %>
   
-  <table>
-    <tr class="field">
-      <th><%= f.label :title %></th>
-      <td><%= f.text_field :title, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-    <th><%= f.label :speaker %></th>
-    <td>
-      <%= f.select :speaker_id, Speaker.all.map {|speaker| [speaker.name, speaker.id] }, {include_blank: true}, {class: 'form-control'} %>
-    </td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :description %></th>
-      <td><%= f.text_area :description, class: 'form-control' %></td>
-    </tr>
-    <tr class="field">
-      <th><%= f.label :meeting %></th>
-      <td><%= f.select :meeting_id, Meeting.upcoming.map {|meeting| [meeting.date, meeting.id] }, {include_blank: true}, {class: 'form-control'} %></td>
-    </tr>
-    <tr class="actions">
-      <td colspan="2"><%= f.submit class: 'btn btn-success' %></td>
-    </tr>
-  </table>
+  <div class="field form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div><br>
+  <div class="field form-group">
+    <%= f.label :speaker %>
+    <%= f.select :speaker_id, Speaker.all.map {|speaker| [speaker.name, speaker.id] }, {include_blank: true}, {class: 'form-control'} %>
+  </div><br>
+  <div class="field form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div><br>
+  <div class="field form-group">
+    <%= f.label :meeting %>
+    <%= f.select :meeting_id, Meeting.upcoming.map {|meeting| [meeting.date, meeting.id] }, {include_blank: true}, {class: 'form-control'} %>
+  </div><br><br>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
 <% end %>

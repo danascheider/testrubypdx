@@ -1,17 +1,17 @@
 <nav id='admin_navbar'>
   <ul class='nav nav-pills'>
     <li role='presentation'><%= link_to "Add Meetings", new_meeting_path %></li>
-    <li role='presentation' class='active'><%= link_to "Add Speakers", new_speaker_path %></li>
+    <li role='presentation'><%= link_to "Add Speakers", new_speaker_path %></li>
     <li role='presentation'><%= link_to "Add Talks", new_talk_path %></li>
-    <li role='presentation'><%= link_to "Add Venues", new_venue_path %></li>
+    <li role='presentation' class='active'><%= link_to "Add Venues", new_venue_path %></li>
   </ul>
 </nav>
 <br>
 
-<div class='admin_view active' id='create_speaker'>
+<div class='admin_view active' id='create_venue'>
   <p id='notice'><%= notice %></p>
 
-  <h3>Create Speaker</h3>
+  <h3>Create Venue</h3>
 
   <%= render 'form' %>
 </div>

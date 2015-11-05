@@ -1,9 +1,17 @@
-<div class='row'>
-  <div class='col-lg-8 col-lg-offset-2 centered'>
-    <h1>New Meeting</h1>
+<nav id='admin_navbar'>
+  <ul class='nav nav-pills'>
+    <li role='presentation' class='active'><%= link_to "Add Meetings", new_meeting_path %></li>
+    <li role='presentation'><%= link_to "Add Speakers", new_speaker_path %></li>
+    <li role='presentation'><%= link_to "Add Talks", new_talk_path %></li>
+    <li role='presentation'><%= link_to "Add Venues", new_venue_path %></li>
+  </ul>
+</nav>
+<br>
 
-    <%= render 'form' %>
+<div class='admin_view active' id='create_meeting'>
+  <p id='notice'><%= notice %></p>
 
-    <%= link_to 'Back', meetings_path %><br><br>
-  </div>
+  <h3>Create Meeting</h3>
+
+  <%= render partial: 'form' %>
 </div>

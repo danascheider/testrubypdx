@@ -1,6 +1,7 @@
 class Meeting < ActiveRecord::Base
   has_many :talks
   has_many :speakers, through: :talks
+  belongs_to :venue
   
   validates_presence_of :date
 

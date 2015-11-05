@@ -15,7 +15,9 @@ class SpeakersController < ApplicationController
 
   # GET /speakers/new
   def new
+    @admin = User.first
     @speaker = Speaker.new
+    render :layout => 'admin'    
   end
 
   # GET /speakers/1/edit

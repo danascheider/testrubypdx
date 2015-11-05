@@ -1,10 +1,17 @@
-<div class='row'>
-  <div class='col-lg-8 col-lg-offset-2 centered'>
+<nav id='admin_navbar'>
+  <ul class='nav nav-pills'>
+    <li role='presentation'><%= link_to "Add Meetings", new_meeting_path %></li>
+    <li role='presentation'><%= link_to "Add Speakers", new_speaker_path %></li>
+    <li role='presentation' class='active'><%= link_to "Add Talks", new_talk_path %></li>
+    <li role='presentation'><%= link_to "Add Venues", new_venue_path %></li>
+  </ul>
+</nav>
+<br>
 
-    <h1>New Talk</h1>
+<div class='admin_view active' id='create_talk'>
+  <p id='notice'><%= notice %></p>
 
-    <%= render 'form' %>
+  <h3>Create Talk</h3>
 
-    <%= link_to 'Back', talks_path %>
-  </div>
+  <%= render 'form' %>
 </div>
