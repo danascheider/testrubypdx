@@ -38,6 +38,8 @@ gem 'pg', '~> 0.18'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
+gem 'newrelic_rpm'
+
 group :development, :test do
   # Use RSpec for unit tests
   gem 'rspec-rails', '~> 3.3'
