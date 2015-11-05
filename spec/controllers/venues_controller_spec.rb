@@ -199,5 +199,4 @@ RSpec.describe VenuesController, type: :controller do
       end
     end
   end
-
 end
