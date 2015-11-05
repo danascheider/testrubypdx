@@ -1,7 +1,7 @@
-#new_venue, #new_talk, #new_speaker, #new_meeting {  
+#new_venue, #new_talk, #new_speaker, #new_meeting, 
+.edit_meeting, .edit_speaker, .edit_talk { 
   .form-control {
     float: right;
     width: 80%;
-    clear: both;
   }
 }
