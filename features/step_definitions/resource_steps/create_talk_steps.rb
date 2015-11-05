@@ -40,8 +40,3 @@ end
 Then /^I should see a message that the talk needs a title$/ do 
   expect(page).to have_content 'Title can\'t be blank'
 end
-
-Then /^there should be a talk called '([^']*)'$/ do |title|
-  @talk = Talk.find_by_title(title)
-  expect(@talk).to be_a Talk
-end
