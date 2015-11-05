@@ -1,12 +1,22 @@
-# This configuration file is custom generated for Test Ruby PDX
+#
+# This file configures the New Relic Agent.  New Relic monitors Ruby, Java,
+# .NET, PHP, Python and Node applications with deep visibility and low
+# overhead.  For more information, visit www.newrelic.com.
+#
+# Generated November 05, 2015
+# 
+# This configuration file is custom generated for app43094380@heroku.com
+#
+# For full documentation of agent configuration options, please refer to
+# https://docs.newrelic.com/docs/agents/ruby-agent/installation-configuration/ruby-agent-configuration
 
 common: &default_settings
   # Required license key associated with your New Relic account.
-  license_key: f5da7a5d19b3b77eea2d085c86d9d96b2adeb2ab
+  license_key: 1d0a5bb5fe48cbf4015d0462681c33109e494695
 
   # Your application name. Renaming here affects where data displays in New
   # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
-  app_name: Test Ruby PDX
+  app_name: My Application
 
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
@@ -20,7 +30,7 @@ common: &default_settings
 # If your application has other named environments, configure them here.
 development:
   <<: *default_settings
-  app_name: Test Ruby PDX (Development)
+  app_name: My Application (Development)
 
   # NOTE: There is substantial overhead when running in developer mode.
   # Do not use for production or load testing.
@@ -33,7 +43,7 @@ test:
 
 staging:
   <<: *default_settings
-  app_name: Test Ruby PDX (Staging)
+  app_name: My Application (Staging)
 
 production:
   <<: *default_settings
