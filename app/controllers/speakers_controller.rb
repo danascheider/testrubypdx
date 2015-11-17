@@ -31,10 +31,10 @@ class SpeakersController < ApplicationController
 
     respond_to do |format|
       if @speaker.save
-        format.html { redirect_to '/admin', notice: 'Speaker was successfully created.' }
+        format.html { redirect_to :speakers, notice: 'Speaker was successfully created.' }
         format.json { render :show, status: :created, location: @speaker }
       else
-        format.html { redirect_to '/admin', notice: 'Speaker invalid. Please try again.' }
+        format.html { render :new, notice: 'Speaker invalid. Please try again.' }
         format.json { render json: @speaker.errors, status: :unprocessable_entity }
       end
     end

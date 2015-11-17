@@ -20,18 +20,6 @@ When /^I select '([^']*)' from the new talk form's dropdown$/ do |name|
   end
 end
 
-When /^I submit the nested speaker form with these attributes:$/ do |table|
-  data = table.hashes[0]
-
-  within "#nested_speaker_form" do
-    data.each do |key, value|
-      fill_in key, with: value
-    end
-
-    click_button "Use"
-  end
-end
-
 Then /^there should be (\d+) talks? called '([^']*)'$/ do |num, title|
   @talk = Talk.find_by(title: title) if num == '1'
   expect(Talk.where(title: title).count).to eql num.to_i
@@ -49,21 +37,6 @@ Then /^I should see the '#new_talk' form$/ do
   expect(page).to have_selector '#new_talk'
 end
 
-Then /^I should not see the nested speaker form$/ do 
-  expect(page).not_to have_selector '#nested_speaker_form'
-end
-
-Then /^I should not see the new talk form's select$/ do   
-  within "#new_talk" do 
-    expect(page).not_to have_selector "select#talk_speaker_id", visible: true
-  end
-end
-
 Then /^I should see a message that the talk needs a title$/ do 
   expect(page).to have_content 'Title can\'t be blank'
-end
-
-Then /^there should be a talk called '([^']*)'$/ do |title|
-  @talk = Talk.find_by_title(title)
-  expect(@talk).to be_a Talk
 end

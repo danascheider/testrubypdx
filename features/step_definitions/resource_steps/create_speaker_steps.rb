@@ -27,7 +27,7 @@ Then /^there should be no speakers$/ do
 end
 
 Then /^I should see a message that the speaker was invalid$/ do 
-  expect(page).to have_content 'Speaker invalid'
+  expect(page).to have_content 'prohibited this speaker from being saved'
 end
 
 Then /^I should see a message that the speaker was created successfully$/ do 

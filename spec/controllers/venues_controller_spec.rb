@@ -82,9 +82,9 @@ RSpec.describe VenuesController, type: :controller do
           expect(assigns(:venue)).to be_persisted
         end
 
-        it "redirects to the created venue" do
+        it "renders the new venue view" do
           post :create, {:venue => valid_attributes}, valid_session
-          expect(response).to redirect_to(Venue.last)
+          expect(response).to render_template('new')
         end
       end
 

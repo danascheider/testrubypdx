@@ -17,4 +17,4 @@ Feature: Speaker talk routes
       | title            |
       | How to Use RSpec |
     Then the speaker should have a talk called 'How to Use RSpec'
-    And I should be on the last talk's page
+    And I should be on the talk's show page

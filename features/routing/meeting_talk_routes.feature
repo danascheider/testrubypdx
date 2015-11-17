@@ -17,4 +17,4 @@ Feature: Meeting talk routes
       | title                      |
       | I Think Test::Unit Is Best |
     Then the meeting should have a talk called 'I Think Test::Unit Is Best'
-    And I should be on the last talk's page
+    And I should be on the talk's show page
