@@ -12,6 +12,7 @@ class SiteController < ApplicationController
 
   def admin
     @admin = current_user
+    redirect_to new_meeting_url
   end
 
   # Triggered when a user submits the contact form

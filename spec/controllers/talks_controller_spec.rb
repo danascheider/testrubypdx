@@ -120,9 +120,9 @@ RSpec.describe TalksController, type: :controller do
           expect(assigns(:talk)).to be_persisted
         end
 
-        it "redirects to the created talk" do
+        it "renders the new talk view" do
           post :create, {:talk => valid_attributes}, valid_session
-          expect(response).to redirect_to(Talk.last)
+          expect(response).to render_template('new')
         end
 
         it "adds the speaker_id if appropriate" do 

@@ -12,6 +12,14 @@ When /^I visit the first meeting's page$/ do
   visit "/meetings/#{Meeting.first.id}"
 end
 
+Then /^I should be on the first speaker's talks page$/ do 
+  expect(current_path).to eql "/speakers/#{Speaker.first.id}/talks"
+end
+
+Then /^I should be on the first meeting's talks page$/ do 
+  expect(current_path).to eql "/meetings/#{Meeting.first.id}/talks"
+end
+
 Then /^I should see the first meeting's information$/ do 
   expect(page).to have_content(Meeting.first.display_date)
   expect(page).to have_content(Meeting.first.talks.first.title)

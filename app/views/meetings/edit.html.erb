@@ -4,7 +4,7 @@
 
     <%= render 'form' %>
 
-    <% destination = @meeting.date < Date.today ? past_meetings_path : upcoming_meetings_path %>
+    <% destination = @meeting.date && @meeting.date < Date.today ? past_meetings_path : upcoming_meetings_path %>
     <%= link_to 'Show', @meeting %> |
     <%= link_to 'Back', destination %>
   </div>
