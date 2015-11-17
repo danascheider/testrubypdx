@@ -4,10 +4,12 @@
     <h4><%= link_to date_and_time, meeting_url(meeting) %></h3>
     <p><%= meeting.description %></p>
     <% meeting.talks.each do |talk| %>
-      <div class='col-lg-12 col-lg-offset-2'>
-        <h5><%= talk.speaker.name %> - <%= link_to talk.title, talk_url(talk) %></h4>
-        <p><%= talk.description %></p>
-      </div>
+      <div class='row'>
+        <div class='col-lg-10 col-lg-offset-1'>
+          <h5><%= talk.speaker.name %> - <%= link_to talk.title, talk_url(talk) %></h4>
+          <p><%= talk.description %></p>
+        </div>
+      </h5>
     <% end %>
     <% if current_user %>
       <%= link_to 'Edit', edit_meeting_path(meeting) %> |
