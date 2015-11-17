@@ -38,9 +38,9 @@ RSpec.describe SiteController, type: :controller do
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       end
 
-      it "renders the admin template" do 
+      it "redirects to meeting creation" do 
         get :admin, {}, valid_session
-        expect(response).to render_template('admin')
+        expect(response).to redirect_to '/meetings/new'
       end
     end
 
