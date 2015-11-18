@@ -10,6 +10,16 @@
   padding: 4em;
 }
 
+#next-meeting {
+  h2 {
+    font-size: 1.313em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+}
+
 .admin_view:not(.active) {
   display: none;
 }

@@ -8,7 +8,7 @@ RSpec.describe Meeting, type: :model do
   describe 'scopes' do 
     before(:each) do 
       @past_meetings = FactoryGirl.create_list(:past_meeting, 2)
-      @upcoming_meetings = [FactoryGirl.create(:upcoming_meeting)]
+      @upcoming_meetings = FactoryGirl.create_list(:upcoming_meeting, 2)
     end
 
     describe 'past' do 
@@ -20,6 +20,12 @@ RSpec.describe Meeting, type: :model do
     describe 'upcoming' do 
       it 'includes upcoming meetings only' do 
         expect(Meeting.upcoming).to eq @upcoming_meetings
+      end
+    end
+
+    describe 'soonest' do 
+      it 'includes the soonest upcoming meeting' do 
+        expect(Meeting.soonest).to eq @upcoming_meetings.first
       end
     end
   end

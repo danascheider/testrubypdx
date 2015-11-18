@@ -13,7 +13,7 @@ FactoryGirl.define do
 
     factory :upcoming_meeting do 
       sequence :date do |n|
-        Date.today + n.years
+        Date.today + n.days
       end
     end
   end

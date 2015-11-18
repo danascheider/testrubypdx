@@ -8,6 +8,12 @@ class Meeting < ActiveRecord::Base
   scope :past, -> { where('date < ?', Date.today) }
   scope :upcoming, -> { where('date >= ?', Date.today) }
 
+  class << self
+    def soonest
+      Meeting.upcoming.order('date ASC').first
+    end
+  end
+
   def display_date
     datetime = date.to_datetime
     weekday = DateTime::DAYNAMES[datetime.cwday == 7 ? 0 : datetime.cwday]

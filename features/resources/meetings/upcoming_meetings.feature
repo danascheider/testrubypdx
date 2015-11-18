@@ -9,7 +9,7 @@ Feature: Upcoming meetings page
     And there is 1 past meeting
     When I visit the "Upcoming Meetings" page
     Then I should see the text "No meetings have been scheduled yet"
-    And I should see a link to Dana's Twitter page
+    And I should see a link to the Twitter page
 
   Scenario: There is an upcoming meeting
     Given there is 1 upcoming meeting
