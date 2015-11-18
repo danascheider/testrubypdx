@@ -3,13 +3,17 @@
     <% date_and_time = "#{meeting.display_time} #{meeting.display_date}" %>
     <h4><%= link_to date_and_time, meeting_url(meeting) %></h3>
     <p><%= meeting.description %></p>
-    <% meeting.talks.each do |talk| %>
+    <% if meeting.talks.count > 0 %>
       <div class='row'>
         <div class='col-lg-10 col-lg-offset-1'>
-          <h5><%= talk.speaker.name %> - <%= link_to talk.title, talk_url(talk) %></h4>
+
+        <% meeting.talks.each do |talk| %>
+          <h5><%= talk.speaker.name %> - <%= link_to talk.title, talk_url(talk) %></h5>
           <p><%= talk.description %></p>
+        <% end %>
+        
         </div>
-      </h5>
+      </div>
     <% end %>
     <% if current_user %>
       <%= link_to 'Edit', edit_meeting_path(meeting) %> |
