@@ -12,7 +12,7 @@
           <div id='next-meeting' class='panel panel-default'>
             <div class='panel-body'>
               <h2>Next Meeting:</h2>
-              <h3><%= link_to meeting.display_date, meeting_path(meeting) %></h3>
+              <h3><%= link_to "#{meeting.display_time} #{meeting.display_date}", meeting_path(meeting) %></h3>
               <p><%= meeting.description %>
             </div>
           </div>
