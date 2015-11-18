@@ -6,10 +6,17 @@
   <p><%= @meeting.description %></p>
   <% @meeting.talks.each do |talk| %>
     <div class='talk'>
-      <h4><%= talk.title %></h4>
+      <h4><%= talk.speaker.name %> - <%= talk.title %></h4>
       <p><%= talk.description %></p>
     </div>
   <% end %>
+
+  <!-- If the meeting is at Renew Financial, include the map -->
+  <% if !@meeting.venue || @meeting.venue.name == 'Renew Financial' %>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.4720808821035!2d-122.67959114896564!3d45.52070487899911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54950a043c16fc93%3A0x62392a499f2b3951!2s400+SW+6th+Ave%2C+Portland%2C+OR+97204!5e0!3m2!1sen!2sus!4v1447822172341" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe><br><br>
+  <% end %>
+
+  <!-- If an admin is logged in, give admin options -->
   <% if current_user %>
     <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
     <%= link_to 'Destroy', @meeting, method: :delete, data: { confirm: 'Are you sure?' } %> |
