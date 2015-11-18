@@ -21,12 +21,12 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/past
   def past
-    @meetings = Meeting.past
+    @meetings = Meeting.past.order('date DESC')
   end
 
   # GET /meetings/upcoming
   def upcoming
-    @meetings = Meeting.upcoming
+    @meetings = Meeting.upcoming.order('date ASC')
   end
 
   # POST /meetings
