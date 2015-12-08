@@ -36,6 +36,7 @@ bower.json
 .powenv
 
 /.DS_Store
+/app/.DS_Store
 /vendor/.DS_Store
 /features/.DS_Store
 /features/resources/.DS_Store
