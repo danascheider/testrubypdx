@@ -10,6 +10,9 @@ class SiteController < ApplicationController
   def about
   end
 
+  def speak
+  end
+
   def admin
     @admin = current_user
     redirect_to new_meeting_url

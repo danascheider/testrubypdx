@@ -17,5 +17,9 @@ RSpec.describe SiteController, type: :routing do
     it "routes to #admin" do 
       expect(:get => "/admin").to route_to("site#admin")
     end
+
+    it "routes to #speak" do 
+      expect(:get => "/speak").to route_to("site#speak")
+    end
   end
 end

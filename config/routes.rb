@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post 'contact' => 'site#send_mail'
   get  'about' => 'site#about'
   get 'admin' => 'site#admin'
+  get 'speak' => 'site#speak'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

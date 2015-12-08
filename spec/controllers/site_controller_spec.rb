@@ -10,6 +10,13 @@ RSpec.describe SiteController, type: :controller do
     end
   end
 
+  describe "GET #speak" do 
+    it "renders the speak template" do 
+      get :speak, {}, valid_session
+      expect(response).to render_template('speak')
+    end
+  end
+
   describe "POST #send_mail" do 
     let(:valid_params) { {:name => 'Foo', :email => 'bar@baz.com'} }
 
