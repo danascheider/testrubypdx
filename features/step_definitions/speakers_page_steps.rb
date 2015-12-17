@@ -3,5 +3,5 @@ Given /^I am on the speakers page$/ do
 end
 
 Then /^I should see the talk submission form$/ do 
-  expect(page).to have_selector 'form#new_talk'
+  expect(page).to have_selector 'form#submit_talk'
 end
