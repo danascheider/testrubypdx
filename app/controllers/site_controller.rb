@@ -31,4 +31,13 @@ class SiteController < ApplicationController
 
     redirect_to '/contact'
   end
+
+  def submit_talk
+    @admin = User.find_by(id: 1)
+
+    begin
+      ContactMailer.submit_talk(@admin, params).deliver_now
+      flash[:success] = "Thank you! Your talk has been submitted."
+    rescue
+      flash[:error'] = "There was a problem submitting your talk. "
 end

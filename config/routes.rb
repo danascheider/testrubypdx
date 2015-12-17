@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get  'contact' => 'site#contact'
   post 'contact' => 'site#send_mail'
+  post 'submit_talk'=> 'site#submit_talk'
   get  'about' => 'site#about'
   get 'admin' => 'site#admin'
   get 'speak' => 'site#speak'
