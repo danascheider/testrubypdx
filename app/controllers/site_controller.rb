@@ -39,5 +39,7 @@ class SiteController < ApplicationController
       ContactMailer.submit_talk(@admin, params).deliver_now
       flash[:success] = "Thank you! Your talk has been submitted."
     rescue
-      flash[:error'] = "There was a problem submitting your talk. "
+      flash[:error] = "There was a problem submitting your talk."
+    end
+  end
 end
