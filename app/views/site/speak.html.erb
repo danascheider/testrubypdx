@@ -61,7 +61,12 @@
       <section id='submissions'>
         <h2>Submit a Talk</h2>
         <div class='col-lg-8'>
-          <%= form_tag('/contact', method: :post, id: 'submit_talk') do %>
+          <%= form_tag('/submit_talk', method: :post, id: 'submit_talk') do %>
+            <p>
+              <% if message = flash[:success] || flash[:error] %>
+                <%= message %>
+              <% end %>
+            </p>
             <div class='form-group'>
               <%= text_field_tag 'first_name', nil, class: 'form-control', placeholder: 'First Name' %>
             </div>
